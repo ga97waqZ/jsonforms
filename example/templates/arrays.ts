@@ -33,6 +33,10 @@ const schema = {
               }
             }
           }
+        },
+        'date-time': {
+          'type': 'string',
+          'format': 'date-time'
         }
       },
       'required': ['occupation', 'nationality']
@@ -48,6 +52,12 @@ const uischema = {
       'options': {
         'submit': true
       }
+    },
+    {
+      'type': 'Control',
+      'scope': {
+        '$ref': '#/properties/date-time'
+      }
     }
   ]
 };
@@ -61,6 +71,12 @@ const uischemaSimple = {
     'table': true
   }
 };
+const localISOTime = (datestring: string): string => {
+    const date: Date = new Date(datestring);
+    const tzoffset: number = date.getTimezoneOffset() * 60000; // offset in milliseconds
+
+    return (new Date(date.valueOf() - tzoffset)).toISOString();
+};
 const data = {
   'comments': [
     {
@@ -71,7 +87,8 @@ const data = {
       'date': new Date().toISOString().substr(0, 10),
       'message': 'Get ready for booohay'
     }
-  ]
+  ],
+  'date-time':  localISOTime(new Date().toString())
 };
 registerExamples([
   {name: 'array', label: 'Array', data: data, schema: schema, uiSchema: uischema},
