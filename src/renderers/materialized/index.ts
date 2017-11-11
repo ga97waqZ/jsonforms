@@ -2,6 +2,7 @@ import { JsonForms } from '../../core';
 
 export * from './materialized.boolean.control';
 export * from './materialized.date.control';
+export * from './materialized.datetime.control';
 export * from './materialized.time.control';
 export * from './materialized.enum.control';
 export * from './materialized.integer.control';
@@ -77,25 +78,25 @@ export const materialize = () => {
     },
   ]);
 
-  const calcClasses = childrenSize => {
-    const colSize = Math.floor(12 / childrenSize[0]);
+    const calcClasses = childrenSize => {
+        const colSize = Math.floor(12 / childrenSize[0]);
 
-    return ['col', `s${colSize}`];
-  };
+        return ['col', `s${colSize}`];
+    };
 
-  JsonForms.stylingRegistry.register({
-    name: 'horizontal-layout-item',
-    classNames: calcClasses
-  });
+    JsonForms.stylingRegistry.register({
+        name: 'horizontal-layout-item',
+        classNames: calcClasses
+    });
 
-  JsonForms.stylingRegistry.register({
-    name: 'array.item',
-    classNames: calcClasses
-  });
+    JsonForms.stylingRegistry.register({
+        name: 'array.item',
+        classNames: calcClasses
+    });
 
-  JsonForms.stylingRegistry.register({
-    name: 'vertical-layout-item',
-    classNames: ['vertical-layout-item']
-  });
-  JsonForms.stylingRegistry.deregister('select');
+    JsonForms.stylingRegistry.register({
+        name: 'vertical-layout-item',
+        classNames: ['vertical-layout-item']
+    });
+    JsonForms.stylingRegistry.deregister('select');
 };

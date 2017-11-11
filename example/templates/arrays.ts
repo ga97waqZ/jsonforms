@@ -34,6 +34,10 @@ const schema = {
             }
           }
         },
+        'date-time': {
+          'type': 'string',
+          'format': 'date-time'
+        },          
         'time': {
           'type': 'string',
           'format': 'time'
@@ -56,6 +60,12 @@ const uischema = {
     {
       'type': 'Control',
       'scope': {
+        '$ref': '#/properties/date-time'
+      }
+    },
+    {
+      'type': 'Control',
+      'scope': {
         '$ref': '#/properties/time'
       },
     }
@@ -71,6 +81,12 @@ const uischemaSimple = {
     'table': true
   }
 };
+const localISOTime = (datestring: string): string => {
+    const date: Date = new Date(datestring);
+    const tzoffset: number = date.getTimezoneOffset() * 60000; // offset in milliseconds
+
+    return (new Date(date.valueOf() - tzoffset)).toISOString();
+};
 const data = {
   'comments': [
     {
@@ -82,6 +98,7 @@ const data = {
       'message': 'Get ready for booohay'
     }
   ],
+  'date-time':  localISOTime(new Date().toString()),
   'time': '13:37'
 };
 registerExamples([
