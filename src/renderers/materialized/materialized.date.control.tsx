@@ -8,11 +8,11 @@ import { connect, Event } from '../../common/binding';
 export class DateControl extends Control<ControlProps, ControlState> {
 
   render() {
-    const { classNames, id, visible, enabled, errors, label, uischema } = this.props;
+    const { classNames, id, visible, enabled, errors, label, uischema, required } = this.props;
     return (
       <div className={classNames.wrapper}>
         <label htmlFor={id} className={classNames.label} data-error={errors}>
-          {label}
+          {required && !this.state.value ? label + '*' : label}
         </label>
         <input type='date'
                value={this.state.value}
