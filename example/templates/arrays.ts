@@ -20,7 +20,15 @@ const schema = {
           'type': 'string'
         },
         'postalCode': {
-            'type': 'string'
+            'type': 'object',
+            'properties': {
+              'default': {
+                'type': 'string'
+              },
+              'maxlength': {
+                'type': 'number'
+              }
+            }
         },
         'comments': {
           'type': 'array',
@@ -97,7 +105,10 @@ const localISOTime = (datestring: string): string => {
     return (new Date(date.valueOf() - tzoffset)).toISOString();
 };
 const data = {
-  'postalCode': '12345',
+  'postalCode': {
+    'default': '12345',
+    'maxlength': 5
+  },
   'comments': [
     {
       'date': new Date(2001, 8, 11).toISOString().substr(0, 10),
