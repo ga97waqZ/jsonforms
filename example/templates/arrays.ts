@@ -19,6 +19,17 @@ const schema = {
         'occupation': {
           'type': 'string'
         },
+        'postalCode': {
+            'type': 'object',
+            'properties': {
+              'default': {
+                'type': 'string'
+              },
+              'maxlength': {
+                'type': 'number'
+              }
+            }
+        },
         'comments': {
           'type': 'array',
           'items': {
@@ -48,7 +59,13 @@ const uischema = {
       'options': {
         'submit': true
       }
-    }
+    },
+      {
+          'type': 'Control',
+          'scope': {
+              '$ref': '#/properties/postalCode'
+          }
+      }
   ]
 };
 const uischemaSimple = {
@@ -62,6 +79,10 @@ const uischemaSimple = {
   }
 };
 const data = {
+  'postalCode': {
+    'default': '12345',
+    'maxlength': 5
+  },
   'comments': [
     {
       'date': new Date(2001, 8, 11).toISOString().substr(0, 10),
