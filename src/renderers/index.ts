@@ -8,6 +8,7 @@ export * from './controls/integer.control';
 export * from './controls/number.control';
 export * from './controls/date.control';
 export * from './controls/datetime.control';
+export * from './controls/time.control';
 export * from './controls/enum.control';
 export * from './controls/textarea.control';
 export * from './layouts/vertical.layout';

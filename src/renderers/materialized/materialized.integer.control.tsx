@@ -9,12 +9,12 @@ import { connect, Event } from '../../common/binding';
 export class MaterializedIntegerControl extends Control<ControlProps, ControlState> {
 
   render() {
-    const { classNames, id, visible, enabled, errors, label } = this.props;
+    const { classNames, id, visible, enabled, errors, label, uischema, required } = this.props;
 
     return (
       <div className={classNames.wrapper}>
         <label htmlFor={id} className={classNames.label} data-error={errors}>
-          {label}
+          {required && !this.state.value ? label + '*' : label}
         </label>
         <input type='number'
                step='1'
@@ -26,6 +26,7 @@ export class MaterializedIntegerControl extends Control<ControlProps, ControlSta
                id={id}
                hidden={!visible}
                disabled={!enabled}
+               autoFocus={uischema.options && uischema.options.focus}
         />
       </div>
     );

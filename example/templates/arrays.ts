@@ -37,6 +37,10 @@ const schema = {
         'date-time': {
           'type': 'string',
           'format': 'date-time'
+        },
+        'time': {
+          'type': 'string',
+          'format': 'time'
         }
       },
       'required': ['occupation', 'nationality']
@@ -57,6 +61,12 @@ const uischema = {
       'type': 'Control',
       'scope': {
         '$ref': '#/properties/date-time'
+      }
+    },
+    {
+      'type': 'Control',
+      'scope': {
+        '$ref': '#/properties/time'
       }
     }
   ]
@@ -88,7 +98,8 @@ const data = {
       'message': 'Get ready for booohay'
     }
   ],
-  'date-time':  localISOTime(new Date().toString())
+  'date-time':  localISOTime(new Date().toString()),
+  'time': '13:37'
 };
 registerExamples([
   {name: 'array', label: 'Array', data: data, schema: schema, uiSchema: uischema},
