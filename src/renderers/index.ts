@@ -11,7 +11,6 @@ export * from './controls/datetime.control';
 export * from './controls/time.control';
 export * from './controls/enum.control';
 export * from './controls/textarea.control';
-export * from './controls/textfieldlength.control';
 export * from './layouts/vertical.layout';
 export * from './layouts/horizontal.layout';
 export * from './layouts/group.layout';
