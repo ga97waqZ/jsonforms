@@ -37,6 +37,8 @@ export class TextControl extends Control<ControlProps, ControlState> {
                hidden={!visible}
                disabled={!enabled}
                autoFocus={uischema.options && uischema.options.focus}
+               maxlength={maxLength}
+               size={maxLength}
         />
         <div className={divClassNames}>
           {!isValid ? formatErrorMessage(errors) : ''}

@@ -25,6 +25,8 @@ export class MaterializedTextControl extends Control<ControlProps, ControlState>
                hidden={!visible}
                disabled={!enabled}
                autoFocus={uischema.options && uischema.options.focus}
+               maxlength={maxLength}
+               style={'width :' + maxLength * 15 + 'px;'}
         />
         <label htmlFor={id} className={classNames.label} data-error={errors}>
           {setLabelField(label, required)}
