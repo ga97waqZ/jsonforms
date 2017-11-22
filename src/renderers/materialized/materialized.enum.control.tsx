@@ -28,7 +28,8 @@ export class MaterializedEnumControl extends Control<ControlProps, ControlState>
       visible,
       enabled,
       data,
-      errors
+      errors,
+      required
     } = this.props;
     const options = resolveSchema(
       schema,
@@ -62,7 +63,7 @@ export class MaterializedEnumControl extends Control<ControlProps, ControlState>
           }
         </select>
         <label htmlFor={id} data-error={errors}>
-          {label}
+          {required ? label + '*' : label}
         </label>
       </div>
     );
