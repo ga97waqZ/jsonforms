@@ -19,6 +19,10 @@ const schema = {
         'occupation': {
           'type': 'string'
         },
+        'postalCode': {
+            'type': 'string',
+            'maxLength': 5
+        },
         'comments': {
           'type': 'array',
           'items': {
@@ -57,6 +61,12 @@ const uischema = {
         'submit': true
       }
     },
+      {
+          'type': 'Control',
+          'scope': {
+              '$ref': '#/properties/postalCode'
+          }
+      },
     {
       'type': 'Control',
       'scope': {
@@ -88,6 +98,7 @@ const localISOTime = (datestring: string): string => {
     return (new Date(date.valueOf() - tzoffset)).toISOString();
 };
 const data = {
+  'postalCode': '12345',
   'comments': [
     {
       'date': new Date(2001, 8, 11).toISOString().substr(0, 10),
