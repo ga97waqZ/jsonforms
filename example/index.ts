@@ -17,6 +17,7 @@ import './templates/masterdetail';
 import './templates/resolve';
 import './templates/uischema-registry';
 import './templates/ecore';
+import './templates/dates';
 
 window.onload = ev => {
   const selectExampleElement = createExampleSelection();
