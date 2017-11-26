@@ -17,9 +17,6 @@ export class MaterializedIntegerControl extends Control<ControlProps, ControlSta
 
     return (
       <div className={classNames.wrapper}>
-        <label htmlFor={id} className={classNames.label} data-error={errors}>
-          {setLabelField(label, required)}
-        </label>
         <input type='number'
                step='1'
                value={this.state.value}
@@ -32,6 +29,9 @@ export class MaterializedIntegerControl extends Control<ControlProps, ControlSta
                disabled={!enabled}
                autoFocus={uischema.options && uischema.options.focus}
         />
+        <label htmlFor={id} className={classNames.label} data-error={errors}>
+           {setLabelField(label, required)}
+        </label>
       </div>
     );
   }

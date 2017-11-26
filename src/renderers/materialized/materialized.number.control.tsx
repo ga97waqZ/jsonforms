@@ -18,9 +18,6 @@ export class NumberControl extends Control<ControlProps, ControlState> {
 
     return (
       <div className={classNames.wrapper}>
-        <label htmlFor={id} className={classNames.label} data-error={errors}>
-          {setLabelField(label, required)}
-        </label>
         <input type='number'
                step='0.1'
                value={this.state.value}
@@ -33,6 +30,9 @@ export class NumberControl extends Control<ControlProps, ControlState> {
                disabled={!enabled}
                autoFocus={uischema.options && uischema.options.focus}
         />
+        <label htmlFor={id} className={classNames.label} data-error={errors}>
+           {setLabelField(label, required)}
+        </label>
       </div>
     );
   }

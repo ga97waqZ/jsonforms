@@ -151,7 +151,7 @@ export const mapStateToControlProps = (state, ownProps) => {
   const maxLength = ref === undefined || ownProps.schema === undefined ? undefined :
       resolveSchema(ownProps.schema, ref).maxLength;
   const required =
-      controlElement.scope !== undefined && isRequired(ownProps.schema, $ref);
+      controlElement.scope !== undefined && isRequired(ownProps.schema, controlElement.scope.$ref);
 
   const styles = JsonForms.stylingRegistry.get('control');
   const classNames: string[] = !_.isEmpty(controlElement.scope) ?
