@@ -138,6 +138,22 @@ export const setLabelField = (label: string, required: boolean): string => {
   return required ? label + '*' : label;
 };
 
+/**
+ * returns a string in simplified extended ISO format (ISO 8601), which is always
+ * 24 characters long (YYYY-MM-DDTHH:mm:ss.sssZ).
+ *
+ * @param {string} date the date to be included in format YYYY-MM-DDTHH:mm:ss.sssZ
+ * @param {string} time the time to be included in format HH:mm
+ * @returns {string} combination of the two input parameters in ISO format (ISO 8601)
+ *                    YYYY-MM-DDTHH:mm:ss.sssZ
+ */
+export const assembleDateTime = (date: string, time: string): string => {
+  const resultDate: string = new Date(date).toISOString().substr(0, 11);
+  const resultTime: string = time + ':00.000Z';
+
+  return resultDate + resultTime;
+};
+
 export const mapStateToControlProps = (state, ownProps) => {
   const path = composeWithUi(ownProps.uischema, ownProps.path);
   const visible = _.has(ownProps, 'visible') ? ownProps.visible :  isVisible(ownProps, state);
@@ -154,7 +170,7 @@ export const mapStateToControlProps = (state, ownProps) => {
   const styles = JsonForms.stylingRegistry.get('control');
   const classNames: string[] = !_.isEmpty(controlElement.scope) ?
     styles.concat(
-      [`${convertToClassName(ref)}`]
+      [`${convertToClassName(controlElement.scope.$ref)}`]
     ) : [''];
   const inputClassName =
     ['validate']

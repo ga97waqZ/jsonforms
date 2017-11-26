@@ -2,6 +2,10 @@ import { registerExamples } from '../example';
 const schema = {
   'type': 'object',
   'properties': {
+    'date-time': {
+      'type': 'string',
+      'format': 'date-time'
+    },
     'date': {
       'type': 'string',
       'format': 'date'
@@ -13,6 +17,20 @@ const schema = {
   }
 };
 const uischema = {
+  'type': 'VerticalLayout',
+  'elements': [
+  {
+  'type': 'HorizontalLayout',
+  'elements': [
+    {
+      'type': 'Control',
+      'scope': {
+        '$ref': '#/properties/date-time'
+      }
+    },
+  ]
+  },
+  {
   'type': 'HorizontalLayout',
   'elements': [
     {
@@ -28,8 +46,11 @@ const uischema = {
       }
     }
   ]
+  }
+]
 };
 const data = {
+  'date-time':  '2017-11-26T23:11:18.353Z',
   'date': new Date().toISOString().substr(0, 10),
   'time': '13:37'
 };
