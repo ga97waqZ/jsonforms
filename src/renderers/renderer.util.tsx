@@ -154,7 +154,7 @@ export const mapStateToControlProps = (state, ownProps) => {
   const styles = JsonForms.stylingRegistry.get('control');
   const classNames: string[] = !_.isEmpty(controlElement.scope) ?
     styles.concat(
-      [`${convertToClassName(controlElement.scope.$ref)}`]
+      [`${convertToClassName(ref)}`]
     ) : [''];
   const inputClassName =
     ['validate']
