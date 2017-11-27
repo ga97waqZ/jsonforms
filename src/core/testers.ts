@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { JsonSchema } from '../models/jsonSchema';
-import { ControlElement, Scopable, UISchemaElement } from '../models/uischema';
+import { ControlElement, UISchemaElement } from '../models/uischema';
 import { resolveSchema } from '../path.util';
 import { NOT_APPLICABLE } from './uischema.registry';
 
@@ -16,7 +16,6 @@ export type RankedTester = (uischema: UISchemaElement, schema: JsonSchema) => nu
 
 export const isControl = (uischema: any): uischema is ControlElement =>
   !_.isEmpty(uischema) && uischema.scope !== undefined;
-
 
 /**
  * Only applicable for Controls.
@@ -94,21 +93,6 @@ export const schemaTypeIs = (expectedType: string): Tester => schemaMatches(sche
 export const formatIs = (expectedFormat: string): Tester => schemaMatches(schema =>
     !_.isEmpty(schema)
     && schema.format === expectedFormat
-    && schema.type === 'string'
-);
-
-/**
- * Only applicable for Controls.
- *
- * This function checks whether the given UI schema is of type Control
- * and if so, resolves the sub-schema referenced by the control and checks
- * whether the pattern of the sub-schema matches the expected one.
- *
- * @param {string} expectedPattern the expected pattern of the resolved sub-schema
- */
-export const patternIs = (expectedPattern: string): Tester => schemaMatches(schema =>
-    !_.isEmpty(schema)
-    && schema.pattern === expectedPattern
     && schema.type === 'string'
 );
 

@@ -1,6 +1,5 @@
 import * as _ from 'lodash';
 
-import { JsonSchema } from '../models/jsonSchema';
 import { ControlElement, ILabelObject } from '../models/uischema';
 
 class LabelObject implements ILabelObject {
@@ -26,9 +25,8 @@ const deriveLabel = (controlElement: ControlElement): string => {
 };
 
 /**
- * Return a label object based on the given JSON schema and control element.
- * @param {JsonSchema} schema the JSON schema that the given control element is referring to
- * @param {ControlElement} controlElement the UI schema to obtain a label object for
+ * Return a label object based on the given control element.
+ * @param {ControlElement} withLabel the UI schema to obtain a label object for
  * @returns {ILabelObject}
  */
 

@@ -51,7 +51,7 @@
         "no-inferred-empty-object-type": true,
         "no-invalid-this": true,
         "no-misused-new": true,
-        "no-object-literal-type-assertion": true,
+        "no-object-literal-type-assertion": false,
         "no-shadowed-variable": true,
         "no-string-literal": true,
         "no-string-throw": true,
