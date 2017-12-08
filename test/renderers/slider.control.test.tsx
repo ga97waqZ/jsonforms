@@ -44,9 +44,6 @@ test.beforeEach(t => {
     type: 'Control',
     scope: {
       $ref: '#/properties/foo',
-    },
-    options: {
-      slider: true
     }
   };
 });
@@ -63,9 +60,6 @@ test('tester with wrong schema type', t => {
     type: 'Control',
     scope: {
       $ref: '#/properties/foo'
-    },
-    options: {
-      slider: true
     }
   };
   t.is(
@@ -89,9 +83,6 @@ test('tester with wrong schema type, but sibling has correct one', t => {
     type: 'Control',
     scope: {
       $ref: '#/properties/foo'
-    },
-    options: {
-      slider: true
     }
   };
   t.is(
@@ -113,14 +104,11 @@ test('tester with wrong schema type, but sibling has correct one', t => {
   );
 });
 
-test('tester with matching schema type (number)', t => {
+test('tester with correct schema type, but missing maximum and minimum fields', t => {
   const control: ControlElement = {
     type: 'Control',
     scope: {
       $ref: '#/properties/foo'
-    },
-    options: {
-      slider: true
     }
   };
   t.is(
@@ -135,26 +123,15 @@ test('tester with matching schema type (number)', t => {
         }
       }
     ),
-    4
+    -1
   );
 });
 
-test('tester with matching schema type (integer)', t => {
-  const schema: JsonSchema = {
-    type: 'object',
-    properties: {
-      foo: {
-        type: 'integer'
-      }
-    }
-  };
+test('tester with correct schema type, but missing maximum', t => {
   const control: ControlElement = {
     type: 'Control',
     scope: {
       $ref: '#/properties/foo'
-    },
-    options: {
-      slider: true
     }
   };
   t.is(
@@ -164,7 +141,83 @@ test('tester with matching schema type (integer)', t => {
         type: 'object',
         properties: {
           foo: {
-            type: 'integer'
+            type: 'number',
+            minimum: 2
+          }
+        }
+      }
+    ),
+    -1
+  );
+});
+
+test('tester with correct schema type,but missing minimum', t => {
+  const control: ControlElement = {
+    type: 'Control',
+    scope: {
+      $ref: '#/properties/foo'
+    }
+  };
+  t.is(
+    sliderControlTester(
+      control,
+      {
+        type: 'object',
+        properties: {
+          foo: {
+            type: 'number',
+            maximum: 10
+          }
+        }
+      }
+    ),
+    -1
+  );
+});
+
+
+test('tester with matching schema type (number)', t => {
+  const control: ControlElement = {
+    type: 'Control',
+    scope: {
+      $ref: '#/properties/foo'
+    }
+  };
+  t.is(
+    sliderControlTester(
+      control,
+      {
+        type: 'object',
+        properties: {
+          foo: {
+            type: 'number',
+            maximum: 10,
+            minimum: 2
+          }
+        }
+      }
+    ),
+    4
+  );
+});
+
+test('tester with matching schema type (integer)', t => {
+  const control: ControlElement = {
+    type: 'Control',
+    scope: {
+      $ref: '#/properties/foo'
+    }
+  };
+  t.is(
+    sliderControlTester(
+      control,
+      {
+        type: 'object',
+        properties: {
+          foo: {
+            type: 'integer',
+            maximum: 10,
+            minimum: 2
           }
         }
       }
@@ -178,7 +231,9 @@ test('render', t => {
     type: 'object',
     properties: {
       foo: {
-        type: 'number'
+        type: 'number',
+        maximum: 10,
+        minimum: 2
       }
     }
   };
@@ -215,9 +270,6 @@ test('render without label', t => {
     type: 'Control',
     scope: {
       $ref: '#/properties/foo'
-    },
-    options: {
-      slider: true
     },
     label: false
   };
@@ -432,6 +484,7 @@ test('multiple errors', t => {
       foo: {
         type: 'number',
         minimum: 4,
+        maximum: 10,
         enum: [4, 6, 8]
       }
     }
