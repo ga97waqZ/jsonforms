@@ -9,6 +9,8 @@ export * from './controls/number.control';
 export * from './controls/date.control';
 export * from './controls/enum.control';
 export * from './controls/textarea.control';
+export * from './controls/radiobutton.control';
+export * from './controls/autocomplete.control';
 export * from './layouts/vertical.layout';
 export * from './layouts/horizontal.layout';
 export * from './layouts/group.layout';
