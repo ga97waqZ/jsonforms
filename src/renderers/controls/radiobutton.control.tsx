@@ -34,8 +34,7 @@ export class RadiobuttonControl extends Control<ControlProps, ControlState> {
 
         return (
             <div className={classNames.wrapper}
-                 hidden={!visible}
-                 disabled={!enabled}>
+                 hidden={!visible}>
                 <label htmlFor={id} className={classNames.label} data-error={errors}>
                     {label}
                 </label>
@@ -49,8 +48,8 @@ export class RadiobuttonControl extends Control<ControlProps, ControlState> {
                                   id={optionValue}
                                   value={optionValue}
                               />
-                              <label for={optionValue}
-                                  onClick={e => this.handleChange(e.target.value)}>
+                              <label htmlFor={optionValue}
+                                  onClick={() => this.handleChange(optionValue)}>
                                   {optionValue}
                               </label>
                           </div>

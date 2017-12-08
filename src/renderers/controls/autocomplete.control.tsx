@@ -44,9 +44,10 @@ export class AutocompleteControl extends Control<ControlProps, ControlState> {
                     className={classNames.input}
                     hidden={!visible}
                     disabled={!enabled}
-                    value={this.state.value}
-                    onChange={(ev: Event<HTMLSelectElement>) =>
-                        dispatch(update(path, () => ev.currentTarget.value))
+                    value={this.state.value || ''}
+                    onChange={
+                      (ev: Event<HTMLInputElement>) =>
+                        this.handleChange(ev.currentTarget.value)
                     }
                     list={id}
                 />

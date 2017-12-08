@@ -26,7 +26,6 @@ export class MaterializedRadiobuttonControl extends Control<ControlProps, Contro
             id,
             label,
             visible,
-            enabled,
             errors
         } = this.props;
         const options = resolveSchema(
@@ -40,8 +39,7 @@ export class MaterializedRadiobuttonControl extends Control<ControlProps, Contro
             // for-materialize-css-design
             // we need here a hack to delete input field.
             <form className={classNames.wrapper.replace('input-field', '')} hidden={!visible}
-                  action='#'
-                  disabled={!enabled}>
+                  action='#'>
                 <label htmlFor={id} data-error={errors}>
                     {label}
                 </label>
@@ -55,8 +53,8 @@ export class MaterializedRadiobuttonControl extends Control<ControlProps, Contro
                                     id={optionValue}
                                     value={optionValue}
                                 />
-                                <label for={optionValue}
-                                       onClick={e => this.handleChange(e.target.value)}>
+                                <label htmlFor={optionValue}
+                                       onClick={() => this.handleChange(optionValue)}>
                                     {optionValue}
                                 </label>
                             </p>
