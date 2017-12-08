@@ -2,17 +2,25 @@ import { JSX } from '../JSX';
 import * as _ from 'lodash';
 import { withIncreasedRank } from '../../core/testers';
 import { Control, ControlProps, ControlState } from '../controls/Control';
-import { mapStateToControlProps, registerStartupRenderer } from '../renderer.util';
+import {
+    computeLabel,
+    mapStateToControlProps,
+    registerStartupRenderer
+} from '../renderer.util';
 import { numberControlTester } from '../controls/number.control';
 import { connect, Event } from '../../common/binding';
 
 export class NumberControl extends Control<ControlProps, ControlState> {
 
   render() {
-    const { data, classNames, id, visible, enabled, errors, label, uischema } = this.props;
+    const { data, classNames, id, visible, enabled, errors, label, uischema,
+      required } = this.props;
 
     return (
       <div className={classNames.wrapper}>
+        <label htmlFor={id} className={classNames.label} data-error={errors}>
+          {computeLabel(label, required)}
+        </label>
         <input type='number'
                step='0.1'
                value={this.state.value || ''}
@@ -25,9 +33,6 @@ export class NumberControl extends Control<ControlProps, ControlState> {
                disabled={!enabled}
                autoFocus={uischema.options && uischema.options.focus}
         />
-        <label htmlFor={id} className={classNames.label} data-error={errors}>
-          {label}
-        </label>
       </div>
     );
   }

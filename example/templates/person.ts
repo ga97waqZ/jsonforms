@@ -51,6 +51,10 @@ const schema = {
         'Rheinland-Pfalz', 'Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein',
         'Thüringen']
     },
+    'postalCode': {
+      'type': 'string',
+      'maxLength': 5
+    },
   },
   'required': ['occupation', 'nationality']
 };
@@ -159,6 +163,16 @@ const uischema = {
             '$ref': '#/properties/province'
           }
         },
+       {
+          'type': 'Control',
+          'scope': {
+            '$ref': '#/properties/postalCode'
+          },
+          'options': {
+            'trim': true,
+            'restrict': true
+          }
+        }
       ]
     },
   ]
@@ -167,7 +181,8 @@ const data = {
   name: 'John Doe',
   vegetarian: false,
   birthDate: '1985-06-02',
-  personalData: {}
+  personalData: {},
+  postalCode: '12345'
 };
 registerExamples([
   {name: 'person', label: 'Person', data: data, schema: schema, uiSchema: uischema}

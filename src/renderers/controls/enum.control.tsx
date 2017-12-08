@@ -7,9 +7,10 @@ import { update } from '../../actions';
 import { connect, Event } from '../../common/binding';
 import { Control, ControlProps, ControlState } from './Control';
 import {
-    formatErrorMessage,
-    mapStateToControlProps,
-    registerStartupRenderer
+  computeLabel,
+  formatErrorMessage,
+  mapStateToControlProps,
+  registerStartupRenderer
 } from '../renderer.util';
 
 /**
@@ -36,7 +37,8 @@ export class EnumControl extends Control<ControlProps, ControlState> {
       enabled,
       path,
       errors,
-      dispatch
+      dispatch,
+      required
     } = this.props;
 
     const isValid = errors.length === 0;
@@ -49,7 +51,7 @@ export class EnumControl extends Control<ControlProps, ControlState> {
     return (
       <div className={classNames.wrapper}>
         <label htmlFor={id} className={classNames.label}>
-          {label}
+          {computeLabel(label, required)}
         </label>
         <select
           className={classNames.input}

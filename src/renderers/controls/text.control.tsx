@@ -1,7 +1,10 @@
 import { JSX } from '../JSX';
 import { isControl, RankedTester, rankWith } from '../../core/testers';
 import { Control, ControlProps, ControlState } from './Control';
+import { resolveSchema } from '../../path.util';
+import { ControlElement } from '../../models/uischema';
 import {
+  computeLabel,
   formatErrorMessage,
   mapStateToControlProps,
   registerStartupRenderer
@@ -17,14 +20,16 @@ export const textControlTester: RankedTester = rankWith(1, isControl);
 export class TextControl extends Control<ControlProps, ControlState> {
 
   render() {
-    const { classNames, id, visible, enabled, errors, label, uischema } = this.props;
+    const { classNames, id, visible, enabled, errors, label, uischema, schema, required } = this.props;
     const isValid = errors.length === 0;
     const divClassNames = 'validation' + (isValid ? '' : ' validation_error');
+    const controlElement = uischema as ControlElement;
+    const maxLength = resolveSchema(schema, controlElement.scope.$ref).maxLength;
 
     return (
       <div className={classNames.wrapper}>
         <label htmlFor={id} className={classNames.label}>
-          {label}
+          {computeLabel(label, required)}
         </label>
         <input value={this.state.value || ''}
                onChange={
@@ -36,6 +41,8 @@ export class TextControl extends Control<ControlProps, ControlState> {
                hidden={!visible}
                disabled={!enabled}
                autoFocus={uischema.options && uischema.options.focus}
+               maxlength={uischema.options && uischema.options.restrict ? maxLength : undefined}
+               size={uischema.options && uischema.options.trim ? maxLength : undefined}
         />
         <div className={divClassNames}>
           {!isValid ? formatErrorMessage(errors) : ''}
