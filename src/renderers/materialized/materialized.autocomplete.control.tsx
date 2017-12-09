@@ -28,8 +28,10 @@ export class MaterializedAutocompleteControl extends Control<ControlProps, Contr
         dataObject[i] = null;
       }
 
-      $(`[id='${id}']`).autocomplete({
-        data: dataObject
+      $(() => {
+        $(`[id='${id}']`).autocomplete({
+          data: dataObject
+        });
       });
     }
 
