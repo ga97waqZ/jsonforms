@@ -1,47 +1,47 @@
 import { JSX } from '../JSX';
-import * as _ from 'lodash';
+import PropTypes from 'prop-types';
 import { JsonForms } from '../../core';
-import { RendererProps } from '../../core/renderer';
-import { groupTester } from '../layouts/group.layout';
-import { GroupLayout } from '../../models/uischema';
-import {
-    JsonFormsLayout,
-    mapStateToLayoutProps,
-    registerStartupRenderer,
-    renderChildren
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+import { mapStateToControlProps, registerStartupRenderer, renderChildren
 } from '../renderer.util';
+import { withIncreasedRank } from '../../core/testers';
+import { groupTester } from '../layouts/group.layout';
 import { connect } from '../../common/binding';
+import { RendererProps } from '../../core/renderer';
+import { GroupLayout } from '../../models/uischema';
 
+export const GroupLayoutRenderer = (props: RendererProps) => {
+    const { uischema, schema, path, visible } = props;
 
+    render(){
+        const group = uischema as GroupLayout;
+        const classNames = JsonForms.stylingRegistry.getAsClassName('group-layout');
 
-export class MaterializedGroupLayoutRenderer {
-    const group = uischema as GroupLayout;
-
-    const classNames = JsonForms.stylingRegistry.getAsClassName('group-layout');
-
-    return (
-        <fieldset className={classNames}
-                  hidden={visible === undefined || visible === null ? false : !visible}
-        >
-            {
-                !_.isEmpty(group.label) ?
-                    <legend className={JsonForms.stylingRegistry.getAsClassName('group.label')}>
-                        {group.label}
-                    </legend> : ''
-            }
-            {
-                renderChildren(
-                    group.elements,
-                    schema,
-                    'group-layout-item',
-                    path
-                )
-            }
-        </fieldset>
-    );
+        return (
+            <div>
+                <Card className={classNames}>
+                    {
+                        !_.isEmpty(group.label) ?
+                            <legend className={JsonForms.stylingRegistry.getAsClassName
+                            ('group.label')}>
+                                {group.label}
+                            </legend> : ''
+                    }
+                    {
+                        renderChildren(
+                            group.elements,
+                            schema,
+                            'group-layout-item',
+                            path
+                        )
+                    }
+                </Card>
+            </div>
+        );
+    }
 };
 
 export default registerStartupRenderer(
-    groupTester,
-    connect(mapStateToLayoutProps)(GroupLayoutRenderer)
+    withIncreasedRank(1, groupTester),
+    connect(mapStateToControlProps)(GroupLayoutRenderer)
 );
