@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {initJsonFormsStore} from '../../../test/helpers/setup';
+import { initJsonFormsStore } from '../../../test/helpers/setup';
 import test from 'ava';
-import {GroupLayout, JsonForms} from '@jsonforms/core';
+import { GroupLayout, JsonForms } from '@jsonforms/core';
 import { renderIntoDocument } from '../../../test/helpers/binding';
-import {Provider} from 'react-redux';
-import {findRenderedDOMElementWithClass} from '../../../test/helpers/react-test';
-import GroupLayoutRenderer, {groupTester } from '../../src/layouts/group.layout';
+import { Provider } from 'react-redux';
+import { findRenderedDOMElementWithClass } from '../../../test/helpers/react-test';
+import GroupLayoutRenderer, { groupTester } from '../../src/layouts/group.layout';
 
 test.before(() => {
   JsonForms.stylingRegistry.registerMany([
@@ -90,9 +90,7 @@ test('hide', t => {
   const store = initJsonFormsStore({}, {}, t.context.uischema);
   const tree = renderIntoDocument(
     <Provider store={store}>
-      <GroupLayoutRenderer uischema={t.context.uischema}
-                           visible={false}
-      />
+      <GroupLayoutRenderer uischema={t.context.uischema} visible={false} />
     </Provider>
   );
   const groupLayout = findRenderedDOMElementWithClass(tree, 'group-layout') as HTMLDivElement;
