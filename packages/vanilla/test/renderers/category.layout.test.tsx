@@ -105,6 +105,7 @@ test('show by default', t => {
             <CategoryLayoutRenderer uischema={t.context.uischema} />
         </Provider>
     );
-    const categoryLayout = findRenderedDOMElementWithClass(tree, 'category-layout') as HTMLDivElement;
+    const categoryLayout = findRenderedDOMElementWithClass(tree, 'category-layout') as
+        HTMLDivElement;
     t.false(categoryLayout.hidden);
 });
