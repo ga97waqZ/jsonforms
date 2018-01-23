@@ -1,14 +1,15 @@
 import * as React from 'react';
+import * as _ from 'lodash';
 import {
+    CategoryLayout,
+    JsonFromsLayout,
+    mapStateToLayoutProps,
     RankedTester,
     rankWith,
+    registerStartupRenderer,
+    renderChildren,
     RendererProps,
     uiTypeIs,
-    CategoryLayout,
-    renderChildren,
-    JsonFormsLayout,
-    mapStateToLayoutProps,
-    registerStartupRenderer,
 } from '@jsonforms/core';
 import { connect } from 'react-redux';
 
@@ -18,7 +19,7 @@ import { connect } from 'react-redux';
  */
 export const categoryLayoutTester: RankedTester = rankWith(1, uiTypeIs('CategoryLayout'));
 
-export const HorizontalLayoutRenderer = ({ schema, uischema, path, visible }: RendererProps) => {
+export const CategoryLayoutRenderer = ({ schema, uischema, path, visible }: RendererProps) => {
 
     const categoryLayout = uischema as CategoryLayout;
 
