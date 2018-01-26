@@ -15,6 +15,8 @@ import {
 import { connect } from 'react-redux';
 import { MaterialLayoutRenderer, MaterialLayoutRendererProps } from './layout.util';
 import { JsonForms } from '../../../core/src/core';
+import { ControlElement } from '../../../core/src/models/uischema';
+import { resolveSchema } from '../../../core/src/util/resolvers';
 
 export const categoryLayoutTester: RankedTester = rankWith(1, uiTypeIs('CategoryLayout'));
 
@@ -66,9 +68,10 @@ export class MaterialCategoryLayoutRenderer {
             </AppBar>
             data.map(optionValue => {
                  return(
-                     {value === optionValue && <TabContainer>
+                     {
+                        value === optionValue && <TabContainer>
                          <MaterialLayoutRenderer {...childProps}/>
-                     <TabContainer>
+                        <TabContainer>
                      }
                 )
             }
@@ -78,6 +81,6 @@ export class MaterialCategoryLayoutRenderer {
 }
 
 export default registerStartupRenderer(
-    categoryLayoutTester,
+    categoryLayoutTester(1, categoryLayoutTester),
     connect(mapStateToLayoutProps)(MaterialCategoryLayoutRenderer)
 );
