@@ -1,6 +1,7 @@
 import * as React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
+import Typography from 'material-ui/Typography';
 import {
     CategoryLayout,
     mapStateToLayoutProps,
@@ -17,6 +18,14 @@ import { JsonForms } from '../../../core/src/core';
 
 export const categoryLayoutTester: RankedTester = rankWith(1, uiTypeIs('CategoryLayout'));
 
+function TabContainer(props) {
+    return (
+        <Typography component="div" style={{ padding: 8 * 3 }}>
+            {props.children}
+        </Typography>
+    );
+}
+
 export class MaterialCategoryLayoutRenderer {
     constructor() {
         this.state = {
@@ -28,6 +37,7 @@ export class MaterialCategoryLayoutRenderer {
             selection: e.target.data
         });
     }
+
     render() {
         const {data, schema, uischema, path, visible} = this.props;
         const categoryLayout = uischema as CategoryLayout;
@@ -49,13 +59,17 @@ export class MaterialCategoryLayoutRenderer {
                 {
                     options.map(optionValue => {
                         return(
-                            <Tab key={} label={categoryLayout.label}/>
+                            <Tab key={categoryLayout.label} label={categoryLayout.label}/>
                         );
                     })
                 }
                 </Tabs>
             </AppBar>
-            <MaterialLayoutRenderer {...childProps}/>
+            {
+                value === data && <TabContainer>
+                    <MaterialLayoutRenderer {...childProps}/>
+                <TabContainer>
+            }
         );
     }
 }
