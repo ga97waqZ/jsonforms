@@ -54,22 +54,25 @@ export class MaterialCategoryLayoutRenderer {
         ).enum;
 
         return (
-            <AppBar>
+            <div>
+            <AppBar position='static'>
                 <Tabs value={data} onChange={this.handleChange}>
-                {
                     options.map(optionValue => {
                         return(
-                            <Tab key={categoryLayout.label} label={categoryLayout.label}/>
-                        );
-                    })
-                }
+                            <Tab key={optionValue} label={optionValue}/>
+                    );
+                })
                 </Tabs>
             </AppBar>
-            {
-                value === data && <TabContainer>
-                    <MaterialLayoutRenderer {...childProps}/>
-                <TabContainer>
+            data.map(optionValue => {
+                 return(
+                     {value === optionValue && <TabContainer>
+                         <MaterialLayoutRenderer {...childProps}/>
+                     <TabContainer>
+                     }
+                )
             }
+            </div>
         );
     }
 }
