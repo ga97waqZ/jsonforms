@@ -18,13 +18,13 @@ import { JsonForms } from '../../../core/src/core';
 
 export const categoryLayoutTester: RankedTester = rankWith(1, uiTypeIs('CategoryLayout'));
 
-function TabContainer(props) {
+const TabContainer = (props => {
     return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
+        <Typography component='div' style={{ padding: 8 * 3 }}>
             {props.children}
         </Typography>
     );
-}
+});
 
 export class MaterialCategoryLayoutRenderer {
     constructor() {
