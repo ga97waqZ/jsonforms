@@ -10,7 +10,8 @@ import {
     registerStartupRenderer,
     RendererProps,
     state,
-    uiTypeIs
+    uiTypeIs,
+    withIncreasedRank
 } from '@jsonforms/core';
 import { connect } from 'react-redux';
 import { MaterialLayoutRenderer, MaterialLayoutRendererProps } from './layout.util';
@@ -50,6 +51,11 @@ export class MaterialCategoryLayoutRenderer {
             direction: 'column',
             visible
         };
+        const getTab = optionValue => {
+            return(
+                <Tab key={optionValue} label={optionValue}/>
+            );
+        };
         const options = resolveSchema(
             schema,
             (uischema as ControlElement).scope.$ref
@@ -59,28 +65,16 @@ export class MaterialCategoryLayoutRenderer {
             <div>
             <AppBar position='static'>
                 <Tabs value={data} onChange={this.handleChange}>
-                    options.map(optionValue => {
-                        return(
-                            <Tab key={optionValue} label={optionValue}/>
-                    );
+                    options.map(optionValue => {this.getTab(optionValue)}
                 })
                 </Tabs>
             </AppBar>
-            data.map(optionValue => {
-                 return(
-                     {
-                        value === optionValue && <TabContainer>
-                         <MaterialLayoutRenderer {...childProps}/>
-                        <TabContainer>
-                     }
-                )
-            }
             </div>
         );
     }
 }
 
 export default registerStartupRenderer(
-    categoryLayoutTester(1, categoryLayoutTester),
+    withIncreasedRank(1, categoryLayoutTester),
     connect(mapStateToLayoutProps)(MaterialCategoryLayoutRenderer)
 );
