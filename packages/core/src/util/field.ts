@@ -12,6 +12,7 @@ import {
   Resolve
 } from '../util';
 import { mapDispatchToControlProps } from './renderer';
+import { getLocale, getTranslations } from '../reducers';
 
 export interface JsonFormsFieldConstructable {
   new(props: FieldProps): Component<FieldProps, any>;
@@ -39,6 +40,8 @@ export interface FieldProps {
   enabled: boolean;
   dispatch: any;
   isValid: boolean;
+  locale: string;
+  translations: any;
 
   handleChange(string, any): (void);
 }
@@ -67,7 +70,9 @@ export const mapStateToFieldProps = (state, ownProps) => {
     enabled,
     id,
     path,
-    isValid
+    isValid,
+    locale: getLocale(state),
+    translations: getTranslations(state)
   };
 };
 export const mapDispatchToFieldProps = mapDispatchToControlProps;

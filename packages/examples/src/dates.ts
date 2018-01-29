@@ -50,11 +50,25 @@ const data = {
   time: '13:37',
   datetime: moment().format()
 };
+
+const translations = {
+  'en-US': {
+    cancelLabel: 'Cancel',
+    clearLabel: 'Clear'
+  },
+  'de-DE': {
+    cancelLabel: 'ABBRECHEN',
+    clearLabel: 'LÖSCHEN'
+  }
+};
+
 registerExamples([
   {
     name: 'dates',
     label: 'Dates',
     data,
     schema,
-    uiSchema: uischema }
+    uiSchema: uischema,
+    translations
+  }
 ]);

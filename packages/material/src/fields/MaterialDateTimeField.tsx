@@ -10,38 +10,34 @@ import {
 } from '@jsonforms/core';
 import { connect } from 'react-redux';
 import { DateTimePicker } from 'material-ui-pickers';
-import * as moment from 'moment'
+import * as moment from 'moment';
 import 'moment/locale/de';
 import KeyboardArrowLeftIcon from 'material-ui-icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from 'material-ui-icons/KeyboardArrowRight';
 import DateRangeIcon from 'material-ui-icons/DateRange';
 import AccessTimeIcon from 'material-ui-icons/AccessTime';
- 
-moment.locale('de');
 
 export const MaterialDateTimeField = (props: FieldProps) => {
-  const { data, id, enabled, uischema, path, handleChange } = props;
+  const { data, id, enabled, uischema, path, handleChange, locale, translations } = props;
 
-  // TODO: move this to internationalization file
-  const german = {
-      format: 'DD.MM.YYYY HH:mm',
-      cancelLabel: 'ABBRECHEN',
-      clearLabel: 'LÖSCHEN'
-  };
+  const localeData = moment.localeData((locale));
+  const localeDateTimeFormat = `${localeData.longDateFormat('L')} ${localeData.longDateFormat('LT')}`;
+  const cancelLabel = translations.cancelLabel;
+  const clearLabel = translations.clearLabel;
 
   let inputProps = {};
 
   return (
       <DateTimePicker
           value={data || null}
-          onChange={ datetime => 
+          onChange={ datetime =>
             handleChange(path, datetime ? moment(datetime).format() : '')
           }
           id={id}
-          format={german.format}
+          format={localeDateTimeFormat}
           ampm={false}
-          cancelLabel={german.cancelLabel}
-          clearLabel={german.clearLabel}
+          cancelLabel={cancelLabel}
+          clearLabel={clearLabel}
           clearable={true}
           disabled={!enabled}
           autoFocus={uischema.options && uischema.options.focus}

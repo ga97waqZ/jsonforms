@@ -24,3 +24,6 @@ export const i18nReducer = (
 export const fetchTranslation = state => {
   return state.translations ? state.translations[state.locale] : undefined;
 };
+export const fetchLocale = state => {
+  return state.locale;
+};
