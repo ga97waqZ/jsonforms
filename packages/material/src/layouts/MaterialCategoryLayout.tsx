@@ -1,33 +1,25 @@
 import * as React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import Typography from 'material-ui/Typography';
 import {
     CategoryLayout,
     mapStateToLayoutProps,
     RankedTester,
     rankWith,
     registerStartupRenderer,
-    RendererProps,
-    state,
     uiTypeIs,
     withIncreasedRank
 } from '@jsonforms/core';
 import { connect } from 'react-redux';
-import { MaterialLayoutRenderer, MaterialLayoutRendererProps } from './layout.util';
-import { JsonForms } from '../../../core/src/core';
+import { MaterialLayoutRenderer, MaterialLayoutRendererProps } from '../util/layout';
 import { ControlElement } from '../../../core/src/models/uischema';
 import { resolveSchema } from '../../../core/src/util/resolvers';
 
 export const categoryLayoutTester: RankedTester = rankWith(1, uiTypeIs('CategoryLayout'));
 
-const TabContainer = (props => {
-    return (
-        <Typography component='div' style={{ padding: 8 * 3 }}>
-            {props.children}
-        </Typography>
-    );
-});
+export const state = {
+    selection: 0
+};
 
 export class MaterialCategoryLayoutRenderer {
     constructor() {
@@ -64,10 +56,11 @@ export class MaterialCategoryLayoutRenderer {
         return (
             <div>
             <AppBar position='static'>
-                <Tabs value={data} onChange={this.handleChange}>
-                    options.map(optionValue => {this.getTab(optionValue)}
+                <Tabs value={data} onChange={this.handleChange(e)}>
+                    options.map(data => {getTab(optionValue)}
                 })
                 </Tabs>
+                <MaterialLayoutRenderer {...childProps}/>
             </AppBar>
             </div>
         );
