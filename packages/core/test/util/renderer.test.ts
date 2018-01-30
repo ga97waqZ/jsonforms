@@ -31,6 +31,15 @@ const coreUISchema = {
   scope: '#/properties/firstName',
 };
 
+export const coreSchema = {
+  type: 'object',
+  properties: {
+    firstName: {
+      type: 'string'
+    }
+  }
+};
+
 const createState = uischema => ({
   jsonforms: {
     common: {
@@ -48,6 +57,9 @@ const createState = uischema => ({
     },
     validation: {
       errors: []
+    },
+    i18n: {
+      locale: 'en-US'
     }
   }
 });
@@ -59,7 +71,8 @@ test('mapStateToControlProps - visible via ownProps ', t => {
   };
   const ownProps = {
     visible: true,
-    uischema
+    uischema,
+    schema: coreSchema
   };
   const props = mapStateToControlProps(createState(uischema), ownProps);
   t.true(props.visible);
@@ -72,7 +85,8 @@ test('mapStateToControlProps - hidden via ownProps ', t => {
   };
   const ownProps = {
     visible: false,
-    uischema
+    uischema,
+    schema: coreSchema
   };
   const props = mapStateToControlProps(createState(uischema), ownProps);
   t.false(props.visible);
@@ -84,7 +98,8 @@ test('mapStateToControlProps - hidden via state ', t => {
     rule: hideRule
   };
   const ownProps = {
-    uischema
+    uischema,
+    schema: coreSchema
   };
   const props = mapStateToControlProps(createState(uischema), ownProps);
   t.false(props.visible);
@@ -96,7 +111,8 @@ test('mapStateToControlProps - visible via state ', t => {
     rule: hideRule
   };
   const ownProps = {
-    uischema
+    uischema,
+    schema: coreSchema
   };
   const clonedState = _.cloneDeep(createState(uischema));
   clonedState.jsonforms.common.data.firstName = 'Lisa';
@@ -111,7 +127,8 @@ test('mapStateToControlProps - enabled via ownProps ', t => {
   };
   const ownProps = {
     enabled: true,
-    uischema
+    uischema,
+    schema: coreSchema
   };
   const props = mapStateToControlProps(createState(uischema), ownProps);
   t.true(props.enabled);
@@ -124,7 +141,8 @@ test('mapStateToControlProps - disabled via ownProps ', t => {
   };
   const ownProps = {
     enabled: false,
-    uischema
+    uischema,
+    schema: coreSchema
   };
   const props = mapStateToControlProps(createState(uischema), ownProps);
   t.false(props.enabled);
@@ -136,7 +154,8 @@ test('mapStateToControlProps - disabled via state ', t => {
     rule: disableRule
   };
   const ownProps = {
-    uischema
+    uischema,
+    schema: coreSchema
   };
   const props = mapStateToControlProps(createState(uischema), ownProps);
   t.false(props.enabled);
@@ -148,7 +167,8 @@ test('mapStateToControlProps - enabled via state ', t => {
     rule: disableRule
   };
   const ownProps = {
-    uischema
+    uischema,
+    schema: coreSchema
   };
   const clonedState = _.cloneDeep(createState(uischema));
   clonedState.jsonforms.common.data.firstName = 'Lisa';
@@ -158,7 +178,8 @@ test('mapStateToControlProps - enabled via state ', t => {
 
 test('mapStateToControlProps - path', t => {
   const ownProps = {
-    uischema: coreUISchema
+    uischema: coreUISchema,
+    schema: coreSchema
   };
   const props = mapStateToControlProps(createState(coreUISchema), ownProps);
   t.is(props.path, 'firstName');
@@ -167,7 +188,8 @@ test('mapStateToControlProps - path', t => {
 test('mapStateToControlProps - compose path with ownProps.path', t => {
   const ownProps = {
     uischema: coreUISchema,
-    path: 'yo'
+    path: 'yo',
+    schema: coreSchema
   };
   const props = mapStateToControlProps(createState(coreUISchema), ownProps);
   t.is(props.path, 'yo.firstName');
@@ -176,7 +198,8 @@ test('mapStateToControlProps - compose path with ownProps.path', t => {
 
 test('mapStateToControlProps - derive label', t => {
   const ownProps = {
-    uischema: coreUISchema
+    uischema: coreUISchema,
+    schema: coreSchema
   };
   const props = mapStateToControlProps(createState(coreUISchema), ownProps);
   t.is(props.label, 'First Name');
@@ -189,7 +212,8 @@ test('mapStateToControlProps - derive label', t => {
       label: {
         show: false
       }
-    }
+    },
+    schema: coreSchema
   };
   const props = mapStateToControlProps(createState(coreUISchema), ownProps);
   t.is(props.label, '');
@@ -197,7 +221,8 @@ test('mapStateToControlProps - derive label', t => {
 
 test('mapStateToControlProps - data', t => {
   const ownProps = {
-    uischema: coreUISchema
+    uischema: coreUISchema,
+    schema: coreSchema
   };
   const props = mapStateToControlProps(createState(coreUISchema), ownProps);
   t.is(props.data, 'Homer');
@@ -205,7 +230,8 @@ test('mapStateToControlProps - data', t => {
 
 test('mapStateToControlProps - errors', t => {
   const ownProps = {
-    uischema: coreUISchema
+    uischema: coreUISchema,
+    schema: coreSchema
   };
   const clonedState = _.cloneDeep(createState(coreUISchema));
   clonedState.jsonforms.validation.errors = [{
@@ -218,7 +244,8 @@ test('mapStateToControlProps - errors', t => {
 
 test('mapStateToControlProps - id', t => {
   const ownProps = {
-    uischema: coreUISchema
+    uischema: coreUISchema,
+    schema: coreSchema
   };
   const props = mapStateToControlProps(createState(coreUISchema), ownProps);
   t.is(props.id, '#/properties/firstName');

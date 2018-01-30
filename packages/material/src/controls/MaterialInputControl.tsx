@@ -8,6 +8,7 @@ import {
   formatErrorMessage,
   isControl,
   isDescriptionHidden,
+  isErrorVisible,
   mapStateToControlProps,
   RankedTester,
   rankWith,
@@ -31,11 +32,12 @@ export class MaterialInputControl extends Control<ControlProps, ControlState> {
       parentPath,
       description
     } = this.props;
-    const isValid = errors.length === 0;
+    let isValid = errors.length === 0;
+    isValid = !isErrorVisible(isValid, errors, uischema);
     const trim = uischema.options && uischema.options.trim;
-    let style = {};
+    const style: {[x: string]: any} = {};
     if (!visible) {
-      style = {display: 'none'};
+      style.display = 'none';
     }
     const showDescription = !isDescriptionHidden(visible, description, this.state.isFocused);
 

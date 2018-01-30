@@ -42,6 +42,9 @@ const createState = uischema => ({
     },
     validation: {
       errors: []
+    },
+    i18n: {
+      locale: 'en-US'
     }
   }
 });
