@@ -62,6 +62,9 @@ export interface ControlProps extends RendererProps {
    * @param value the new value
    */
   handleChange(path: string, value: any);
+
+  locale: string;
+  translations: any;
 }
 
 export interface ControlState {

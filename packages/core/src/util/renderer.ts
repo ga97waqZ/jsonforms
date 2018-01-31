@@ -12,7 +12,7 @@ import {
 } from '../util';
 import { RankedTester } from '../testers';
 import { ControlElement } from '../models/uischema';
-import { getData, getErrorAt, getSubErrorsAt, getTranslations } from '../reducers';
+import { getData, getErrorAt, getSubErrorsAt, getLocale, getTranslations } from '../reducers';
 import { Renderer, RendererProps } from '../renderers/Renderer';
 import { update } from '../actions';
 
@@ -108,7 +108,9 @@ export const mapStateToControlProps = (state, ownProps) => {
     parentPath: ownProps.path,
     fields,
     required,
-    description
+    description,
+    locale: getLocale(state),
+    translations: getTranslations(state)
   };
 };
 

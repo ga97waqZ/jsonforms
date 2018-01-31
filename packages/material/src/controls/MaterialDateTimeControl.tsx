@@ -15,7 +15,7 @@ import {
 } from '@jsonforms/core';
 import { connect } from 'react-redux';
 import { DateTimePicker } from 'material-ui-pickers';
-import * as moment from 'moment'
+import * as moment from 'moment';
 import KeyboardArrowLeftIcon from 'material-ui-icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from 'material-ui-icons/KeyboardArrowRight';
 import DateRangeIcon from 'material-ui-icons/DateRange';
@@ -34,6 +34,8 @@ export class MaterialDateTimeControl extends Control<ControlProps, ControlState>
       required,
       path,
       handleChange,
+      locale,
+      translations,
       data
     } = this.props;
     const isValid = errors.length === 0;
@@ -41,6 +43,10 @@ export class MaterialDateTimeControl extends Control<ControlProps, ControlState>
     const controlElement = uischema as ControlElement;
     const resolvedSchema = resolveSchema(schema, controlElement.scope);
     const description = resolvedSchema.description === undefined ? '' : resolvedSchema.description;
+    const localeData = moment.localeData((locale));
+    const localeDateTimeFormat = `${localeData.longDateFormat('L')} ${localeData.longDateFormat('LT')}`;
+    const cancelLabel = translations.cancelLabel;
+    const clearLabel = translations.clearLabel;
     let style = {};
     if (!visible) {
       style = {display: 'none'};
@@ -62,7 +68,10 @@ export class MaterialDateTimeControl extends Control<ControlProps, ControlState>
         onChange={ datetime => 
           handleChange(path, datetime ? moment(datetime).format() : '')
         }
-        format='MM/DD/YYYY h:mm a'
+        format={localeDateTimeFormat}
+        ampm={false}
+        cancelLabel={cancelLabel}
+        clearLabel={clearLabel}
         clearable={true}
         disabled={!enabled}
         autoFocus={uischema.options && uischema.options.focus}
