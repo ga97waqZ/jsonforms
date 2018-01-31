@@ -14,15 +14,17 @@ import { connect } from 'react-redux';
 import { MaterialLayoutRenderer, MaterialLayoutRendererProps } from '../util/layout';
 import { ControlElement } from '../../../core/src/models/uischema';
 import { resolveSchema } from '../../../core/src/util/resolvers';
+import { Renderer } from '../../../core/src/renderers/Renderer';
 
 export const categoryLayoutTester: RankedTester = rankWith(1, uiTypeIs('CategoryLayout'));
 
-export const state = {
-    selection: 0
-};
+export interface State {
+    selection: selectionId;
+}
 
-export class MaterialCategoryLayoutRenderer {
-    constructor() {
+export class MaterialCategoryLayoutRenderer extends Renderer<RenderProps, State> {
+    constructor(props) {
+        super(props);
         this.state = {
             selection: 0
         };
@@ -43,6 +45,7 @@ export class MaterialCategoryLayoutRenderer {
             direction: 'column',
             visible
         };
+        const{ selection } = this.state;
         const getTab = optionValue => {
             return(
                 <Tab key={optionValue} label={optionValue}/>
@@ -60,8 +63,8 @@ export class MaterialCategoryLayoutRenderer {
                     options.map(data => {getTab(optionValue)}
                 })
                 </Tabs>
-                <MaterialLayoutRenderer {...childProps}/>
             </AppBar>
+                <MaterialLayoutRenderer {...childProps}/>
             </div>
         );
     }
