@@ -2,75 +2,80 @@ import * as React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import {
-    CategoryLayout,
+    and,
+    Categorization,
     mapStateToLayoutProps,
     RankedTester,
     rankWith,
     registerStartupRenderer,
-    uiTypeIs,
-    withIncreasedRank
+    Renderer,
+    RendererProps,
+    Tester,
+    UISchemaElement,
+    uiTypeIs
 } from '@jsonforms/core';
 import { connect } from 'react-redux';
 import { MaterialLayoutRenderer, MaterialLayoutRendererProps } from '../util/layout';
-import { ControlElement } from '../../../core/src/models/uischema';
-import { resolveSchema } from '../../../core/src/util/resolvers';
-import { Renderer } from '../../../core/src/renderers/Renderer';
 
-export const categoryLayoutTester: RankedTester = rankWith(1, uiTypeIs('CategoryLayout'));
+const isSingleLevelCategory: Tester = and(
+    uiTypeIs('Categorization'),
+    (uischema: UISchemaElement): boolean => {
+        const categorization = uischema as Categorization;
 
-export interface State {
-    selection: selectionId;
-}
-
-export class MaterialCategoryLayoutRenderer extends Renderer<RenderProps, State> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selection: 0
-        };
+        return categorization.elements.reduce((acc, e) => acc && e.type === 'Category', true);
     }
-    handleChange(e) {
-        this.setState({
-            selection: e.target.data
-        });
+);
+
+export const categoryTester: RankedTester = rankWith(1, isSingleLevelCategory);
+export interface CategoryState {
+    value: number;
+  }
+
+export class MaterialCategoryLayoutRenderer
+    extends Renderer<RendererProps, CategoryState> {
+    constructor(props) {
+      super(props);
+      this.state = {
+        value: 0
+      };
     }
 
     render() {
-        const {data, schema, uischema, path, visible} = this.props;
-        const categoryLayout = uischema as CategoryLayout;
+        const { uischema, schema, path, visible } = this.props;
+        const { value } = this.state;
+        const category = uischema as Categorization;
+
         const childProps: MaterialLayoutRendererProps = {
-            elements: categoryLayout.elements,
+            elements: category.elements[value].elements,
             schema,
             path,
             direction: 'column',
             visible
         };
-        const{ selection } = this.state;
-        const getTab = optionValue => {
-            return(
-                <Tab key={optionValue} label={optionValue}/>
-            );
-        };
-        const options = resolveSchema(
-            schema,
-            (uischema as ControlElement).scope.$ref
-        ).enum;
+        const style: {[x: string]: any} = { marginBottom: '10px' };
+        if (!visible) {
+            style.display = 'none';
+        }
 
         return (
-            <div>
-            <AppBar position='static'>
-                <Tabs value={data} onChange={this.handleChange(e)}>
-                    options.map(data => {getTab(optionValue)}
-                })
+            <div style={style}>
+                <AppBar position='static'>
+                <Tabs value={value} onChange={this.handleChange}>
+                    {category.elements.map((e, idx) => <Tab  key={idx} label={e.label} />)}
                 </Tabs>
-            </AppBar>
-                <MaterialLayoutRenderer {...childProps}/>
+                </AppBar>
+                <div style={{ marginTop: '0.5em' }}>
+                    <MaterialLayoutRenderer {...childProps}/>
+                </div>
             </div>
         );
+    }
+    private handleChange = (_event, value) => {
+        this.setState({ value });
     }
 }
 
 export default registerStartupRenderer(
-    withIncreasedRank(1, categoryLayoutTester),
+    categoryTester,
     connect(mapStateToLayoutProps)(MaterialCategoryLayoutRenderer)
 );
