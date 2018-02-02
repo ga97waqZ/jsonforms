@@ -1,7 +1,6 @@
 import * as React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import { Card, CardContent } from 'material-ui';
 import {
     and,
     Categorization,
@@ -66,11 +65,7 @@ export class MaterialCategoryLayoutRenderer
                 </Tabs>
                 </AppBar>
                 <div style={{ marginTop: '0.5em' }}>
-                    <Card style={{ marginBottom: '10px' }}>
-                        <CardContent>
-                            <MaterialLayoutRenderer {...childProps}/>
-                        </CardContent>
-                    </Card>
+                    <MaterialLayoutRenderer {...childProps}/>
                 </div>
             </div>
         );
