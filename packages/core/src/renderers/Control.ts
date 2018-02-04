@@ -65,6 +65,11 @@ export interface ControlProps extends RendererProps {
   translations: any;
 
   /**
+   * Description of input field
+   */
+  description: string;
+
+  /**
    * Update handler that emits a data change
    *
    * @param {string} path the path to the data to be updated
