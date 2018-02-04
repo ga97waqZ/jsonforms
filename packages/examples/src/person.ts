@@ -52,6 +52,9 @@ export const schema = {
     postalCode: {
       type: 'string',
       maxLength: 5
+    },
+    totalMoney: {
+      type: 'string'
     }
   },
   required: ['occupation', 'nationality']
@@ -137,6 +140,19 @@ export const uischema = {
             trim: true,
             restrict: true
           }
+        },
+        {
+          type: 'Control',
+          label: {
+            text: '%totalMoney',
+            show: true
+          },
+          scope: '#/properties/totalMoney',
+          options: {
+            trim: true,
+            restrict: true,
+            format: true
+          }
         }
       ]
     }
@@ -162,7 +178,8 @@ const translations = {
     postalcode: 'Postal Code',
     drivingskill: 'Driving skill',
     cancelLabel: 'Cancel',
-    clearLabel: 'Clear'
+    clearLabel: 'Clear',
+    totalMoney: 'Total Money'
   },
   'de-DE': {
     name: 'Name',
@@ -174,7 +191,19 @@ const translations = {
     postalcode: 'Postleitzahl',
     drivingskill: 'Fahrkönnen',
     cancelLabel: 'Stornieren',
-    clearLabel: 'Löschen'
+    clearLabel: 'Löschen',
+    totalMoney: 'Gesamtes Geld'
+  }
+};
+
+const numberSeparators = {
+  'en-US': {
+    decimalSeparator: '.',
+    thousandsSeparator: ','
+  },
+  'de-DE': {
+    decimalSeparator: ',',
+    thousandsSeparator: '.'
   }
 };
 
@@ -185,6 +214,7 @@ registerExamples([
     data,
     schema,
     uiSchema: uischema,
-    translations
+    translations,
+    numberSeparators
   }
 ]);
