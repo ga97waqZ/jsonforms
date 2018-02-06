@@ -49,6 +49,45 @@ export const uischemaGroup = {
     }
   ]
 };
+
+export const uischemaCategory = {
+  type: 'Category',
+  elements: [
+    {
+      type: 'Category',
+      label: 'My first Category',
+      elements: [
+        {
+          type: 'Control',
+          label: 'Name',
+          scope: '#/properties/name'
+        },
+        {
+          type: 'Control',
+          label: 'Birth Date',
+          scope: '#/properties/birthDate'
+        }
+      ]
+    },
+    {
+      type: 'Category',
+      label: 'My second Category',
+      elements: [
+        {
+          type: 'Control',
+          label: 'Name',
+          scope: '#/properties/name'
+        },
+        {
+          type: 'Control',
+          label: 'Birth Date',
+          scope: '#/properties/birthDate'
+        }
+      ]
+    }
+  ]
+};
+
 export const uischemaComplex = {
   type: 'Group',
   label: 'My Group',
@@ -120,5 +159,12 @@ registerExamples([
     data,
     schema,
     uiSchema: uischemaComplex
+  },
+  {
+    name: 'layout-category',
+    label: 'Layout Cagetory',
+    data,
+    schema,
+    uiSchema: uischemaCategory
   }
 ]);
