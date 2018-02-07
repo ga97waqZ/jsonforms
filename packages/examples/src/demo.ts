@@ -9,7 +9,7 @@ export const schema = {
 		},
 		"bestBefore": {
 			"type": "string",
-			"format": "date-time"
+			"format": "date"
 		},
 		"size": {
 			"type": "string",
@@ -342,7 +342,10 @@ export const uischema = {
 										{
 											"type": "Control",
 											"scope": "#/properties/price",
-											"label": "%price"
+											"label": "%price",
+                      "options": {
+												"format": true
+											}
 										},
 										{
 											"type": "Control",
@@ -609,7 +612,7 @@ export const uischema = {
 
 export const data = {
   name: 'Cool Shirt',
-  bestBefore: '2019-04-01T00:00:00+00:00',
+  bestBefore: '2019-04-01',
   size: 'M',
   color: 'grey',
   itemsInStock: 9,
