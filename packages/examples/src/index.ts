@@ -8,6 +8,7 @@ import * as day5 from './day5';
 import * as day6 from './day6';
 import * as dates from './dates';
 import * as dyanmic from './dynamic';
+import * as enumerations from './enumerations';
 import * as generateSchema from './generate';
 import * as generateUISchema from './generateUI';
 import * as layout from './layout';
@@ -27,6 +28,7 @@ export {
   day4,
   day5,
   day6,
+  enumerations,
   generateSchema,
   generateUISchema,
   layout,

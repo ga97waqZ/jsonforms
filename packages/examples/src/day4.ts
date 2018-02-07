@@ -11,10 +11,21 @@ export const schema = {
     ...day3Schema.properties,
     recurrence: {
         type: 'string',
-        enum: ['Never', 'Daily', 'Weekly', 'Monthly']
+        enum: ['Never', 'Daily', 'Weekly', 'Monthly', 'blubblub']
     },
     recurrenceInterval: {
         type: 'integer'
+    },
+    gender: {
+      type: 'string',
+      enum: ['male', 'female' ]
+    },
+    province: {
+      type: 'string',
+      enum: ['Baden-Württemberg', 'Bavaria', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg',
+        'Hessen', 'Niedersachsen', 'Mecklenburg-Vorpommern', 'Nordrhein-Westfalen',
+        'Rheinland-Pfalz', 'Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein',
+        'Thüringen']
     }
   },
   required: ['name']
@@ -27,6 +38,14 @@ export const uischema = {
     {
       type: 'Control',
       scope: '#/properties/recurrence'
+    },
+    {
+      type: 'Control',
+      scope: '#/properties/gender'
+    },
+    {
+      type: 'Control',
+      scope: '#/properties/province'
     },
     {
       type: 'Control',

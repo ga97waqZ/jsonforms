@@ -17,7 +17,7 @@ export const personCoreSchema = {
     },
     nationality: {
       type: 'string',
-      enum: ['DE', 'IT', 'JP', 'US', 'RU', 'Other']
+      enum: ['DE', 'IT', 'JP', 'US', 'RU', 'Other', 'mother']
     }
   }
 };
@@ -51,9 +51,20 @@ export const schema = {
     postalCode: {
       type: 'string',
       maxLength: 5
-    }
+    },
+    gender: {
+      type: 'string',
+      enum: ['male', 'female' ]
+    },
+    province: {
+      type: 'string',
+      enum: ['Baden-Württemberg', 'Bavaria', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg',
+        'Hessen', 'Niedersachsen', 'Mecklenburg-Vorpommern', 'Nordrhein-Westfalen',
+        'Rheinland-Pfalz', 'Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein',
+        'Thüringen']
+      }
   },
-  required: ['occupation', 'nationality']
+  required: ['occupation', 'nationality', 'province', 'gender']
 };
 
 export const uischema = {
@@ -133,6 +144,16 @@ export const uischema = {
             trim: true,
             restrict: true
           }
+        },
+        {
+          type: 'Control',
+          label: 'Gender',
+          scope: '#/properties/gender'
+        },
+        {
+          type: 'Control',
+          label: 'Province',
+          scope: '#/properties/province'
         }
       ]
     }
