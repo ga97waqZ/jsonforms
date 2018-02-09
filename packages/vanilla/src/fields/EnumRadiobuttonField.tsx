@@ -1,63 +1,79 @@
 import * as React from 'react';
 import {
+    and,
+    Control,
     ControlElement,
-    FieldProps,
-    isEnumControl,
+    ControlProps,
+    enumLengthAtMost,
     mapDispatchToFieldProps,
     mapStateToFieldProps,
     RankedTester,
     rankWith,
     registerStartupInput,
-    resolveSchema
+    resolveSchema,
+    schemaMatches,
+    uiTypeIs
 } from '@jsonforms/core';
 import { connect } from 'react-redux';
-import { SyntheticEvent } from 'react';
+import { ControlState } from '../../../core/src/renderers/Control';
 
-const EnumField = (props: FieldProps) => {
-    const { data, className, id, enabled, uischema, schema, path, handleChange } = props;
-    const options = resolveSchema(schema, uischema as ControlElement).scope.$ref).enum;
+export class EnumRadiobuttonField
+    extends Control<ControlProps, ControlState> {
 
-    return (
-        <div
-            className={className}
-            id={id}
-            disabled={!enabled}
-            autoFocus={uischema.options && uischema.options.focus}
-            value={data || ''}
-            onChange={(ev: SyntheticEvent<HTMLSelectElement>) =>
-                handleChange(path, ev.currentTarget.value)
-            }
-        >
-            <label htmlFor={id} className={classNames.label} data-error={errors}>
-                {label}
-            </label>
-            {
-                options.map(optionValue => {
-                    return (
-                        <div>
-                            <input
-                                type='radio'
-                                name={label}
-                                id={optionValue}
-                                value={optionValue}
-                            />
-                            <label for={optionValue}
-                                   onClick={e => this.handleChange(e.target.value)}>
-                                {optionValue}
-                            </label>
-                        </div>
-                    );
-                })
-        </div>
-    );
-};
+    render() {
+        const { uischema, schema, classNames, id, label,
+            visible, enabled, errors} = this.props;
+
+        const options = resolveSchema(
+            schema,
+            (uischema as ControlElement).scope.$ref
+        ).enum;
+
+        return (
+            <div
+                className={classNames.wrapper}
+                hidden={!visible}
+                disabled={!enabled}
+            >
+                <label htmlFor={id} className={classNames.label} data-error={errors}>
+                    {label}
+                </label>
+                {
+                    options.map(optionValue => {
+                        return (
+                            <div>
+                                <input
+                                    type='radio'
+                                    name={label}
+                                    id={optionValue}
+                                    value={optionValue}
+                                />
+                                <label
+                                    for={optionValue}
+                                    onClick={e => this.handleChange(e.target.value)}
+                                >
+                                    {optionValue}
+                                </label>
+                            </div>
+                        );
+                    })
+                }
+            </div>
+        );
+    }
+}
+
 /**
  * Default tester for enum controls.
  * @type {RankedTester}
  */
-export const enumFieldTester: RankedTester = rankWith(2, isEnumControl);
+export const enumRadiobuttonFieldTester: RankedTester = rankWith(2, and(
+    uiTypeIs('Control'),
+    schemaMatches(schema => schema.hasOwnProperty('enum')),
+    enumLengthAtMost(3)
+));
 
 export default registerStartupInput(
-    enumFieldTester,
-    connect(mapStateToFieldProps, mapDispatchToFieldProps)(EnumField)
+    enumRadiobuttonFieldTester,
+    connect(mapStateToFieldProps, mapDispatchToFieldProps)(EnumRadiobuttonField)
 );

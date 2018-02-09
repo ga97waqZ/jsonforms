@@ -1,6 +1,7 @@
 export * from './BooleanField';
 export * from './DateField';
 export * from './EnumField';
+export * from './EnumRadiobuttonField';
 export * from './IntegerField';
 export * from './NumberField';
 export * from './SliderField';

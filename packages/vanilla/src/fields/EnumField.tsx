@@ -10,6 +10,7 @@ import {
   registerStartupInput,
   resolveSchema
 } from '@jsonforms/core';
+
 import { connect } from 'react-redux';
 import { SyntheticEvent } from 'react';
 
