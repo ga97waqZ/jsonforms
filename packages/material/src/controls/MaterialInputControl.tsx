@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   computeLabel,
   Control,
+  ControlElement,
   ControlProps,
   ControlState,
   DispatchField,
@@ -12,7 +13,8 @@ import {
   mapStateToControlProps,
   RankedTester,
   rankWith,
-  registerStartupRenderer
+  registerStartupRenderer,
+  resolveSchema
 } from '@jsonforms/core';
 import { connect } from 'react-redux';
 
@@ -35,7 +37,10 @@ export class MaterialInputControl extends Control<ControlProps, ControlState> {
     } = this.props;
     let isValid = errors.length === 0;
     isValid = !isErrorVisible(isValid, errors, uischema);
-    const trim = config.trim;
+    const controlElement = uischema as ControlElement;
+    const maxLength = resolveSchema(schema, controlElement.scope).maxLength;
+    const trim = (uischema.options && uischema.options.trim)
+      || config.trim && maxLength !== undefined;
     const style: {[x: string]: any} = {};
     if (!visible) {
       style.display = 'none';

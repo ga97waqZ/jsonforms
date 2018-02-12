@@ -11,14 +11,6 @@ export const schema = {
 			"type": "string",
 			"format": "date"
 		},
-		"size": {
-			"type": "string",
-			"enum": ["S", "M", "L", "XL", "XXL"]
-		},
-		"color": {
-			"type": "string",
-			"enum": ["black", "grey"]
-		},
 		"itemsInStock": {
 			"type": "integer"
 		},
@@ -40,7 +32,8 @@ export const schema = {
 			"format": "date-time"
 		},
 		"EANCode": {
-			"type": "string"
+			"type": "string",
+			"maxLength": 13
 		},
 		"author": {
 			"type": "string"
@@ -56,19 +49,13 @@ export const schema = {
 			"format": "date-time"
 		},
 		"ISBNnumber": {
-			"type": "string"
+			"type": "string",
+			"maxLength": 17
 		},
 		"language": {
 			"type": "string"
 		},
 		"publisher": {
-			"type": "string"
-		},
-		"material": {
-			"type": "string",
-			"enum": ["cotton", "polyester", "silk", "mixed"]
-		},
-		"washingNotes": {
 			"type": "string"
 		},
 		"deliveryOptions": {
@@ -84,16 +71,8 @@ export const schema = {
 		"soldOut": {
 			"type": "boolean"
 		},
-		"sleeves": {
-			"type": "string",
-			"enum" : ["short", "long"]
-		},
 		"secondHand": {
 			"type": "boolean"
-		},
-		"collarShape": {
-			"type": "string",
-			"enum" : ["round", "regular"]
 		},
 		"onlineSince": {
 			"type": "string",
@@ -256,72 +235,6 @@ export const uischema = {
 							]
 						}
 					]
-				},
-				{
-					"type": "Group",
-					"label": "Shirt",
-					"elements": [
-						{
-							"type": "VerticalLayout",
-							"elements": [
-								{
-									"type": "HorizontalLayout",
-									"elements": [
-										{
-											"type": "Control",
-											"scope": "#/properties/size",
-											"label": "%size"
-										},
-										{
-											"type": "Control",
-											"scope": "#/properties/color",
-											"label": "%color"
-										}
-									]
-								}
-							]
-						},
-						{
-							"type": "VerticalLayout",
-							"elements": [
-								{
-									"type": "HorizontalLayout",
-									"elements": [
-										{
-											"type": "Control",
-											"scope": "#/properties/material",
-											"label": "%material"
-										},
-										{
-											"type": "Control",
-											"scope": "#/properties/sleeves",
-											"label": "%sleeves"
-										}
-									]
-								}
-							]
-						},
-						{
-							"type": "VerticalLayout",
-							"elements": [
-								{
-									"type": "HorizontalLayout",
-									"elements": [
-										{
-											"type": "Control",
-											"scope": "#/properties/collarShape",
-											"label": "%collarShape"
-										},
-										{
-											"type": "Control",
-											"scope": "#/properties/washingNotes",
-											"label": "%washingNotes"
-										}
-									]
-								}
-							]
-						}
-					]
 				}
 			]
 		},
@@ -350,7 +263,10 @@ export const uischema = {
 										{
 											"type": "Control",
 											"scope": "#/properties/shippingPrice",
-											"label": "%shippingPrice"
+											"label": "%shippingPrice",
+											"options": {
+												"format": true
+											}
 										}
 									]
 								}
@@ -611,14 +527,12 @@ export const uischema = {
 ;
 
 export const data = {
-  name: 'Cool Shirt',
+  name: 'Cool Book',
   bestBefore: '2019-04-01',
-  size: 'M',
-  color: 'grey',
   itemsInStock: 9,
   auctionEnds: '2018-02-19T22:14:51+00:00',
   numberOfBidders: 6,
-  description: 'All cool nerds wear this shirt.',
+  description: 'All cool nerds read this book.',
   isPublished: true,
   auctionStarts: '2018-02-15T10:02:19+00:00',
   EANCode: '7612345678900',
@@ -629,14 +543,11 @@ export const data = {
   ISBNnumber: '978-3-16-148410-0',
   language: 'German',
   publisher: 'TUM',
-  material: 'silk',
   deliveryOptions: 'express',
-  brand: 'GreatShirts',
+  brand: 'GreatBooks',
   internationalShipping: false,
   soldOut: false,
-  sleeves: 'long',
   secondHand: true,
-  collarShape: 'round',
   onlineSince: '2017-11-01T12:45:00+00:00',
   producedOn: '2016-05-14T00:00:00+00:00',
   ageRestriction: 16,
@@ -646,8 +557,7 @@ export const data = {
   shippingPrice: '2.99',
   generalDiscount: 0.1,
   discountWithPromotionCode: 0.3,
-  numberOfViews: 327,
-  washingNotes: 'Wash at max 40° C'
+  numberOfViews: 327
 };
 
 const translations = {
@@ -661,12 +571,6 @@ const translations = {
     language: 'Language',
     ISBNnumber: 'ISBN number',
     ageRestriction: 'Age restriction',
-    size: 'Size',
-    color: 'Color',
-    material: 'Material',
-    sleeves: 'Sleeves',
-    collarShape: 'Collar shape',
-    washingNotes: 'Washing notes',
     price: 'Price',
     shippingPrice: 'Shipping price',
     generalDiscount: 'General discount',
@@ -716,12 +620,6 @@ const translations = {
     language: 'Sprache',
     ISBNnumber: 'ISBN-Nummer',
     ageRestriction: 'Altersbeschränkung',
-    size: 'Größe',
-    color: 'Farbe',
-    material: 'Material',
-    sleeves: 'Ärmel',
-    collarShape: 'Kragenform',
-    washingNotes: 'Waschhinweise',
     price: 'Preis',
     shippingPrice: 'Versandkosten',
     generalDiscount: 'Allgemeiner Rabatt',
@@ -774,6 +672,10 @@ const numberSeparators = {
   }
 };
 
+const config = {
+	trim: false
+};
+
 registerExamples([
   {
     name: 'demo',
@@ -782,6 +684,7 @@ registerExamples([
     schema,
     uiSchema: uischema,
     translations,
-    numberSeparators
+		numberSeparators,
+		config
   }
 ]);
