@@ -7,6 +7,7 @@ import {
   formatErrorMessage,
   isControl,
   isDescriptionHidden,
+  isErrorVisible,
   RankedTester,
   rankWith,
   registerStartupRenderer
@@ -29,7 +30,8 @@ export class InputControl extends Control<VanillaControlProps, ControlState> {
       description
     } = this.props;
 
-    const isValid = errors.length === 0;
+    let isValid = errors.length === 0;
+    isValid = !isErrorVisible(isValid, errors, uischema);
     const divClassNames = 'validation' + (isValid ? ' ' + classNames.description : ' validation_error');
     const showDescription = !isDescriptionHidden(visible, description, this.state.isFocused);
 
