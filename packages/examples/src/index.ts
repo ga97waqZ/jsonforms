@@ -1,3 +1,4 @@
+import * as demo from './demo';
 import * as array from './arrays';
 import * as categorization from './categorization';
 import * as day1 from './day1';
@@ -21,6 +22,7 @@ import Rating from './Rating';
 import { RatingControl, ratingControlTester } from './rating.control';
 
 export {
+  demo,
   array,
   categorization,
   day1,
