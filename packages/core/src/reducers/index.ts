@@ -6,12 +6,14 @@ import { commonStateReducer, extractData, extractSchema, extractUiSchema } from 
 import { JsonForms } from '../core';
 import { JsonFormsState } from '../store';
 import { fetchLocale, fetchNumberSeparators, fetchTranslation, i18nReducer } from './i18n';
+import { configReducer, extractConfig } from './config';
 export {
   validationReducer,
   rendererReducer,
   fieldReducer,
   commonStateReducer,
-  i18nReducer
+  i18nReducer,
+  configReducer
 };
 
 export const jsonformsReducer = (): Reducer<JsonFormsState> =>
@@ -22,6 +24,7 @@ export const jsonformsReducer = (): Reducer<JsonFormsState> =>
       renderers: rendererReducer,
       fields: fieldReducer,
       i18n: i18nReducer,
+      config: configReducer,
       ...JsonForms.reducers
     })
   });
@@ -38,3 +41,4 @@ export const getSubErrorsAt = instancePath => state => subErrorsAt(instancePath)
 export const getTranslations = state => fetchTranslation(state.jsonforms.i18n);
 export const getNumberSeparators = state => fetchNumberSeparators(state.jsonforms.i18n);
 export const getLocale = state => fetchLocale(state.jsonforms.i18n);
+export const getConfig = state => extractConfig(state.jsonforms.config);

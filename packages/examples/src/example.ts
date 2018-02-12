@@ -9,5 +9,6 @@ export interface ExampleDescription {
   translations?: any;
   locale?: String;
   numberSeparators?: any;
+  config?: any;
   setupCallback?(div: HTMLDivElement): void;
 }

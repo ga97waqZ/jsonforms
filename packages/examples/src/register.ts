@@ -35,6 +35,7 @@ export const changeExample = (selectedExample: string, additionalState: Addition
     translations: example.translations,
     locale: example.locale,
     numberSeparators: example.numberSeparators,
+    config: example.config,
     ...additionalState
   };
 

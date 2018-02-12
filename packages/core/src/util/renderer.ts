@@ -12,7 +12,7 @@ import {
 } from '../util';
 import { RankedTester } from '../testers';
 import { ControlElement } from '../models/uischema';
-import { getData, getErrorAt, getLocale, getSubErrorsAt, getTranslations } from '../reducers';
+import { getConfig, getData, getErrorAt, getLocale, getSubErrorsAt, getTranslations } from '../reducers';
 import { Renderer, RendererProps } from '../renderers/Renderer';
 import { update } from '../actions';
 
@@ -145,6 +145,7 @@ export const mapStateToControlProps = (state, ownProps) => {
   const description =
     resolvedSchema !== undefined && resolvedSchema.description !== undefined ?
       translate(translations, resolvedSchema.description) : '';
+  const config = getConfig(state);
 
   return {
     data: Resolve.data(getData(state), path),
@@ -159,7 +160,8 @@ export const mapStateToControlProps = (state, ownProps) => {
     required,
     locale: getLocale(state),
     translations: translations,
-    description
+    description,
+    config
   };
 };
 

@@ -30,11 +30,12 @@ export class MaterialInputControl extends Control<ControlProps, ControlState> {
       visible,
       required,
       parentPath,
-      description
+      description,
+      config
     } = this.props;
     let isValid = errors.length === 0;
     isValid = !isErrorVisible(isValid, errors, uischema);
-    const trim = uischema.options && uischema.options.trim;
+    const trim = config.trim;
     const style: {[x: string]: any} = {};
     if (!visible) {
       style.display = 'none';

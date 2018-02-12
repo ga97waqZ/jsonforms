@@ -4,7 +4,7 @@ import { ControlElement, UISchemaElement } from '../models/uischema';
 import { RankedTester } from '../testers';
 import { JsonForms } from '../core';
 import { JsonSchema } from '../models/jsonSchema';
-import { getData, getErrorAt, getLocale, getNumberSeparators } from '../reducers';
+import { getConfig, getData, getErrorAt, getLocale, getNumberSeparators } from '../reducers';
 import {
   composeWithUi,
   isEnabled,
@@ -41,6 +41,7 @@ export interface FieldProps {
   isValid: boolean;
   locale: string;
   numberSeparators: any;
+  config: any;
 
   handleChange(string, any): (void);
 }
@@ -61,6 +62,7 @@ export const mapStateToFieldProps = (state, ownProps) => {
   const controlElement = ownProps.uischema as ControlElement;
   const id = controlElement.scope || '';
   const inputClassName = ['validate'].concat(isValid ? 'valid' : 'invalid');
+  const config = getConfig(state);
 
   return {
     data: Resolve.data(getData(state), path),
@@ -71,7 +73,8 @@ export const mapStateToFieldProps = (state, ownProps) => {
     path,
     isValid,
     numberSeparators: getNumberSeparators(state),
-    locale: getLocale(state)
+    locale: getLocale(state),
+    config
   };
 };
 export const mapDispatchToFieldProps = mapDispatchToControlProps;

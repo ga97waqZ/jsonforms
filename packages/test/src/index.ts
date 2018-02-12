@@ -9,6 +9,7 @@ import {
   JsonFormsInitialState,
   jsonformsReducer,
   JsonFormsStore,
+  SET_CONFIG,
   SET_LOCALE
 } from '@jsonforms/core';
 import { applyMiddleware, createStore } from 'redux';
@@ -21,6 +22,7 @@ export const initJsonFormsStore = ({
                                      translations,
                                      locale,
                                      numberSeparators,
+                                     config,
                                      ...props
                                    }: JsonFormsInitialState): JsonFormsStore => {
   const store = createStore(
@@ -39,6 +41,7 @@ export const initJsonFormsStore = ({
           locale,
           numberSeparators
         },
+        config,
         ...props
       }
     },
@@ -56,6 +59,11 @@ export const initJsonFormsStore = ({
   store.dispatch({
     type: SET_LOCALE,
     locale
+  });
+
+  store.dispatch({
+    type: SET_CONFIG,
+    config
   });
 
   return store;

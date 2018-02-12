@@ -70,6 +70,12 @@ export interface ControlProps extends RendererProps {
   description: string;
 
   /**
+   * Config object passed in by user or by application
+   * of a default
+   */
+  config: any;
+
+  /**
    * Update handler that emits a data change
    *
    * @param {string} path the path to the data to be updated

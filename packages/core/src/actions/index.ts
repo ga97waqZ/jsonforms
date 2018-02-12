@@ -15,6 +15,7 @@ export const REMOVE_FIELD = `${NAMESPACE}/REMOVE_FIELD`;
 export const SET_TRANSLATIONS = `${NAMESPACE}/SET_TRANSLATIONS`;
 export const SET_LOCALE = `${NAMESPACE}/SET_LOCALE`;
 export const SET_NUMBER_SEPARATORS = `${NAMESPACE}/SET_NUMBER_SEPARATORS`;
+export const SET_CONFIG = `${NAMESPACE}/SET_CONFIG`;
 
 // TODO: fix typings
 export const update =
@@ -78,5 +79,12 @@ export const setNumberSeparators = numberSeparators => dispatch => {
   dispatch({
     type: SET_NUMBER_SEPARATORS,
     numberSeparators
+  });
+};
+
+export const setConfig = config => dispatch => {
+  dispatch({
+    type: SET_CONFIG,
+    config,
   });
 };

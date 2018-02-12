@@ -20,6 +20,7 @@ export interface JsonFormsState {
       locale?: String;
       numberSeparators?: any;
     };
+    config?: any;
     // allow additional state for JSONForms
     [x: string]: any;
   };
@@ -32,6 +33,7 @@ export interface JsonFormsInitialState {
   translations?: any;
   locale?: String;
   numberSeparators?: any;
+  config?: any;
   // allow additional state
   [x: string]: any;
 }

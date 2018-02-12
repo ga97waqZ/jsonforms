@@ -51,6 +51,10 @@ const createState = uischema => ({
           thousandsSeparator: '.'
         }
       }
+    },
+    config: {
+      restrict: false,
+      trim: false
     }
   }
 });
