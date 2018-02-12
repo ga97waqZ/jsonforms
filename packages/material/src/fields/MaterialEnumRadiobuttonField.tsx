@@ -18,29 +18,47 @@ import {
 import { connect } from 'react-redux';
 import { SyntheticEvent } from 'react';
 
-export class EnumRadiobuttonField
-    extends Control<ControlProps, ControlState> {
+export class MaterialEnumRadiobuttonField extends Control<ControlProps, ControlState> {
+    componentDidMount() {
+        $('select').material_select();
+    }
+
+    componentDidUpdate() {
+        $('select').material_select();
+    }
 
     render() {
-        const {classNames, id, uischema,
-            schema, label, errors, visible } = this.props;
+        const {
+            uischema,
+            schema,
+            classNames,
+            id,
+            label,
+            visible,
+            errors
+        } = this.props;
         const options = resolveSchema(
             schema,
             (uischema as ControlElement).scope.$ref
         ).enum;
 
         return (
-            <div
-                className={classNames.wrapper}
+            // according to
+            // https://stackoverflow.com/questions/47338362/radio-buttons-are-not-working-
+            // for-materialize-css-design
+            // we need here a hack to delete input field.
+            <form
+                className={classNames.wrapper.replace('input-field', '')}
                 hidden={!visible}
+                action='#'
             >
-                <label htmlFor={id} className={classNames.label} data-error={errors}>
+                <label htmlFor={id} data-error={errors}>
                     {label}
                 </label>
                 {
                     options.map(optionValue => {
                         return (
-                            <div>
+                            <p>
                                 <input
                                     type='radio'
                                     name={label}
@@ -54,15 +72,14 @@ export class EnumRadiobuttonField
                                 >
                                     {optionValue}
                                 </label>
-                            </div>
+                            </p>
                         );
                     })
                 }
-            </div>
+            </form>
         );
     }
 }
-
 /**
  * Default tester for enum controls.
  * @type {RankedTester}
@@ -72,8 +89,7 @@ export const enumRadiobuttonFieldTester: RankedTester = rankWith(2, and(
     schemaMatches(schema => schema.hasOwnProperty('enum')),
     enumLengthAtMost(3)
 ));
-
 export default registerStartupInput(
     enumRadiobuttonFieldTester,
-    connect(mapStateToControlProps, mapDispatchToControlProps)(EnumRadiobuttonField)
+    connect(mapStateToControlProps, mapDispatchToControlProps)(MaterialEnumRadiobuttonField)
 );

@@ -6,3 +6,5 @@ export * from './MaterialNumberField';
 export * from './MaterialSliderField';
 export * from './MaterialTextField';
 export * from './MaterialTimeField';
+export * from './MaterialEnumRadiobuttonField';
+export * from './MaterialEnumAutocompleteField';

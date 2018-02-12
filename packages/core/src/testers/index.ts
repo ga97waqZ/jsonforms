@@ -302,18 +302,15 @@ export const isRangeControl = and(
  *
  * @param {number} minLength the lower bound for the length of the enum array
  */
-export const enumLengthAtLeast = and(
-    uiTypeIs('Control'),
-    schemaMatches(schema => schema.hasOwnProperty('enum')),
-    (minLength: number): Tester =>
+export const enumLengthAtLeast = (minLength: number): Tester =>
     (uischema: UISchemaElement, schema: JsonSchema): boolean => {
         const options = resolveSchema(
             schema,
-            (uischema as ControlElement).scope.$ref
+            (uischema as ControlElement).scope
         ).enum;
 
         return !_.isEmpty(options) && options.length >= minLength;
-    });
+    };
 
 /**
  * Checks whether the given UI schema has an option with an enum array
@@ -322,15 +319,12 @@ export const enumLengthAtLeast = and(
  *
  * @param {number} maxLength the upper bound for the length of the enum array
  */
-export const enumLengthAtMost = and(
-    uiTypeIs('Control'),
-    schemaMatches(schema => schema.hasOwnProperty('enum')),
-    (maxLength: number): Tester =>
+export const enumLengthAtMost = (maxLength: number): Tester =>
     (uischema: UISchemaElement, schema: JsonSchema): boolean => {
         const options = resolveSchema(
             schema,
-            (uischema as ControlElement).scope.$ref
+            (uischema as ControlElement).scope
         ).enum;
 
         return !_.isEmpty(options) && options.length <= maxLength;
-    });
+    };
