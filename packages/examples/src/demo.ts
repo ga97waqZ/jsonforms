@@ -98,14 +98,10 @@ export const schema = {
 			"type": "string"
 		},
 		"generalDiscount": {
-			"type": "number",
-			"minimum": 0,
-			"maximum": 1
+			"type": "number"
 		},
 		"discountWithPromotionCode": {
-			"type": "number",
-			"minimum": 0,
-			"maximum": 1
+			"type": "number"
 		},
 		"numberOfViews": {
 			"type": "integer"
@@ -115,10 +111,10 @@ export const schema = {
 };
 
 export const uischema = {
-	"type": "Categorization",
+	"type": "VerticalLayout",
 	"elements": [
 		{
-			"type": "Category",
+			"type": "Group",
 			"label": "Description",
 			"elements": [
 				{
@@ -133,14 +129,14 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope":  "#/properties/name",
+											"scope": { "$ref":  "#/properties/name" },
 											"options": {
 												"displayError": true
 											}
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/description",
+											"scope": { "$ref": "#/properties/description" },
 											"options": {
 												"multi": true,
 												"displayError": false
@@ -158,7 +154,7 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/secondHand",
+											"scope": { "$ref": "#/properties/secondHand" },
 										}
 									]
 								}
@@ -178,11 +174,11 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/numberOfPages",
+											"scope": { "$ref": "#/properties/numberOfPages" },
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/author",
+											"scope": { "$ref": "#/properties/author" },
 										}
 									]
 								}
@@ -196,11 +192,11 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/publisher",
+											"scope": { "$ref": "#/properties/publisher" },
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/language",
+											"scope": { "$ref": "#/properties/language" },
 										}
 									]
 								}
@@ -214,11 +210,11 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/ISBNnumber",
+											"scope": { "$ref": "#/properties/ISBNnumber" },
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/ageRestriction",
+											"scope": { "$ref": "#/properties/ageRestriction" },
 										}
 									]
 								}
@@ -229,7 +225,7 @@ export const uischema = {
 			]
 		},
 		{
-			"type": "Category",
+			"type": "Group",
 			"label": "Details",
 			"elements": [
 				{
@@ -244,14 +240,14 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/price",
+											"scope": { "$ref": "#/properties/price" },
                       "options": {
 												"format": true
 											}
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/shippingPrice",
+											"scope": { "$ref": "#/properties/shippingPrice" },
 											"options": {
 												"format": true
 											}
@@ -268,11 +264,11 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/generalDiscount",
+											"scope": { "$ref": "#/properties/generalDiscount" },
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/discountWithPromotionCode",
+											"scope": { "$ref": "#/properties/discountWithPromotionCode" },
 										}
 									]
 								}
@@ -292,11 +288,11 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/deliverableOn",
+											"scope": { "$ref": "#/properties/deliverableOn" },
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/deliveryOptions",
+											"scope": { "$ref": "#/properties/deliveryOptions" },
 										}
 									]
 								}
@@ -310,11 +306,11 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/internationalShipping",
+											"scope": { "$ref": "#/properties/internationalShipping" },
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/soldOut",
+											"scope": { "$ref": "#/properties/soldOut" },
 										}
 									]
 								}
@@ -328,7 +324,7 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/itemsInStock",
+											"scope": { "$ref": "#/properties/itemsInStock" },
 										}
 									]
 								}
@@ -348,11 +344,11 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/brand",
+											"scope": { "$ref": "#/properties/brand" },
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/bestBefore",
+											"scope": { "$ref": "#/properties/bestBefore" },
 										}
 									]
 								}
@@ -366,11 +362,11 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/producedOn",
+											"scope": { "$ref": "#/properties/producedOn" },
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/EANCode",
+											"scope": { "$ref": "#/properties/EANCode" },
 										}
 									]
 								}
@@ -384,11 +380,11 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/weight",
+											"scope": { "$ref": "#/properties/weight" },
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/weightIncludingPackaging",
+											"scope": { "$ref": "#/properties/weightIncludingPackaging" },
 										}
 									]
 								}
@@ -408,11 +404,11 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/isPublished",
+											"scope": { "$ref": "#/properties/isPublished" },
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/numberOfViews",
+											"scope": { "$ref": "#/properties/numberOfViews" },
 										}
 									]
 								}
@@ -426,11 +422,11 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/onlineSince",
+											"scope": { "$ref": "#/properties/onlineSince" },
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/lastModifiedOn",
+											"scope": { "$ref": "#/properties/lastModifiedOn" },
 										}
 									]
 								}
@@ -441,7 +437,7 @@ export const uischema = {
 			]
 		},
 		{
-			"type": "Category",
+			"type": "Group",
 			"label": "Auction",
 			"elements": [
 				{
@@ -456,11 +452,11 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/auctionStarts",
+											"scope": { "$ref": "#/properties/auctionStarts" },
 										},
 										{
 											"type": "Control",
-											"scope": "#/properties/auctionEnds",
+											"scope": { "$ref": "#/properties/auctionEnds" },
 										}
 									]
 								}
@@ -480,7 +476,7 @@ export const uischema = {
 									"elements": [
 										{
 											"type": "Control",
-											"scope": "#/properties/numberOfBidders",
+											"scope": { "$ref": "#/properties/numberOfBidders" },
 										}
 									]
 								}
