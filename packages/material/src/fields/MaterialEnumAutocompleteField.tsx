@@ -29,7 +29,7 @@ export class MaterialEnumAutocompleteField
 
         const options = resolveSchema(
             schema,
-            (uischema as ControlElement).scope.$ref
+            (uischema as ControlElement).scope
         ).enum;
 
         const dataObject = {};

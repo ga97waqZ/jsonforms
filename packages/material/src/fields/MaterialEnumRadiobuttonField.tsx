@@ -16,17 +16,8 @@ import {
     uiTypeIs
 } from '@jsonforms/core';
 import { connect } from 'react-redux';
-import { SyntheticEvent } from 'react';
 
 export class MaterialEnumRadiobuttonField extends Control<ControlProps, ControlState> {
-    componentDidMount() {
-        $('select').material_select();
-    }
-
-    componentDidUpdate() {
-        $('select').material_select();
-    }
-
     render() {
         const {
             uischema,
@@ -39,7 +30,7 @@ export class MaterialEnumRadiobuttonField extends Control<ControlProps, ControlS
         } = this.props;
         const options = resolveSchema(
             schema,
-            (uischema as ControlElement).scope.$ref
+            (uischema as ControlElement).scope
         ).enum;
 
         return (
@@ -67,8 +58,8 @@ export class MaterialEnumRadiobuttonField extends Control<ControlProps, ControlS
                                 />
                                 <label
                                     htmlFor={optionValue}
-                                    onClick={(ev: SyntheticEvent<HTMLInputElement>)
-                                        => this.handleChange(ev.currentTarget.value)}
+                                    onClick={ev => this.handleChange(
+                                        ev.currentTarget.value)}
                                 >
                                     {optionValue}
                                 </label>

@@ -26,7 +26,7 @@ export class EnumAutocompleteField
         const isValid = errors.length === 0;
         const options = resolveSchema(
             schema,
-            (uischema as ControlElement).scope.$ref
+            (uischema as ControlElement).scope
         ).enum;
         const divClassNames = 'validation' + (isValid ? '' : ' validation_error');
 
